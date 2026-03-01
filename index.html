@@ -3,391 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis — Your AI, Your Life</title>
+    <title>Genesis — A Billion People With Someone In Their Corner</title>
+    <meta name="description" content="Personal AI agents that know you, learn you, and work for you. Start free. Every paid agent funds a free one for someone who needs it most.">
+    <meta property="og:title" content="Genesis — Your AI, Your Life">
+    <meta property="og:description" content="AI agents for every human. Earn. Learn. Live. Enjoy. Give.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://genesis-aas.com">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-text { background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(135deg, #818cf8, #a78bfa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .warm-gradient { background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .category-card { transition: all 0.3s; }
-        .category-card:hover { transform: translateY(-4px); }
-        .agent-pill { transition: all 0.2s; }
-        .agent-pill:hover { transform: scale(1.05); }
+        .category-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .agent-pill { transition: all 0.2s; cursor: default; }
+        .agent-pill:hover { transform: scale(1.05); background: rgba(99,102,241,0.15); }
+        .stat-number { font-variant-numeric: tabular-nums; }
+        .glow { box-shadow: 0 0 60px rgba(99,102,241,0.15); }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        .float { animation: float 6s ease-in-out infinite; }
     </style>
 </head>
 <body class="bg-gray-950 text-white min-h-screen">
 
+    <!-- Sticky CTA Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur border-t border-gray-800 py-3 px-4 z-50 flex items-center justify-center gap-4">
+        <span class="text-sm text-gray-400 hidden md:inline">Your first agent is free. No credit card required.</span>
+        <a href="#start" class="bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-indigo-700 transition">Get Your Free Agent →</a>
+    </div>
+
     <!-- Hero -->
-    <section class="py-24 px-4 md:px-8 lg:px-16 text-center">
+    <section class="pt-24 pb-16 px-4 md:px-8 lg:px-16 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-indigo-400 font-medium mb-6 tracking-wide text-sm uppercase">AI Agents for Every Human</p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight">What if everyone had<br><span class="gradient-text">someone in their corner?</span></h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">A personal AI agent that knows your goals, your struggles, your dreams — and works for you 24/7. Not a chatbot. An ally.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a href="#start" class="bg-indigo-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition">Start Free →</a>
+                <a href="#how" class="border border-gray-600 text-gray-300 px-10 py-4 rounded-full text-lg font-medium hover:border-gray-400 transition">See How It Works</a>
+            </div>
+            <p class="text-sm text-gray-500">Free forever. No credit card. Your first agent in 60 seconds.</p>
+        </div>
+    </section>
+
+    <!-- The Problem -->
+    <section class="py-20 px-4 md:px-8 lg:px-16 border-t border-gray-800">
         <div class="max-w-5xl mx-auto">
-            <p class="text-indigo-400 font-semibold mb-4 tracking-widest uppercase">AI Agents for Every Human</p>
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6">Genesis</h1>
-            <p class="text-3xl md:text-4xl gradient-text font-bold mb-8">Your AI, Your Life.</p>
-            <p class="text-xl text-gray-400 mb-6 max-w-3xl mx-auto">Personal AI agents that know you, learn you, and work for you — whether you're building a career, mastering a skill, getting healthy, exploring the world, or changing it.</p>
-            <p class="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">From your first job to your life's mission. One platform. Infinite possibilities.</p>
-            <a href="#pricing" class="bg-indigo-600 text-white px-12 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition inline-block">Get Your Agent →</a>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">The world has a problem.</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="text-center">
+                    <div class="text-5xl font-black stat-number warm-gradient mb-4">62%</div>
+                    <p class="text-gray-400">of your workday is spent on email, searching, and admin — not actual work.</p>
+                    <p class="text-xs text-gray-600 mt-2">McKinsey, 2025</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-black stat-number warm-gradient mb-4">1 in 4</div>
+                    <p class="text-gray-400">adults worldwide feel lonely. Connection is a health crisis, not a luxury.</p>
+                    <p class="text-xs text-gray-600 mt-2">Harvard Study, 86 years</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-black stat-number warm-gradient mb-4">250M</div>
+                    <p class="text-gray-400">children worldwide can't read. Education access remains the great divider.</p>
+                    <p class="text-xs text-gray-600 mt-2">UNESCO, 2025</p>
+                </div>
+            </div>
+            <p class="text-center text-xl text-gray-300 mt-16 max-w-3xl mx-auto">The wealthy have assistants, advisors, and coaches. Everyone else has Google and hope. <strong class="text-white">Genesis changes that.</strong></p>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="py-16 px-4 md:px-8 lg:px-16 border-t border-gray-800">
+    <section id="how" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900">
         <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-12">Three Steps. Any Agent.</h2>
-            <div class="grid md:grid-cols-3 gap-10">
-                <div>
-                    <div class="text-4xl mb-4">💬</div>
-                    <h3 class="text-lg font-semibold mb-2">1. Tell Us What You Need</h3>
-                    <p class="text-gray-400 text-sm">Pick a category or describe your life. We match you with the right agent.</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">How Genesis Works</h2>
+            <p class="text-gray-400 mb-16 text-lg">Three steps. Any agent. Free to start.</p>
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="float" style="animation-delay: 0s;">
+                    <div class="w-16 h-16 bg-indigo-600/20 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl">💬</div>
+                    <h3 class="text-xl font-semibold mb-3">1. Tell Us About You</h3>
+                    <p class="text-gray-400">Your role. Your goals. Your life. We match you with the right agent — or build one from scratch.</p>
                 </div>
-                <div>
-                    <div class="text-4xl mb-4">🧠</div>
-                    <h3 class="text-lg font-semibold mb-2">2. Your Agent Learns You</h3>
-                    <p class="text-gray-400 text-sm">It remembers your goals, preferences, and context. Gets smarter every day.</p>
+                <div class="float" style="animation-delay: 1s;">
+                    <div class="w-16 h-16 bg-purple-600/20 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl">🧠</div>
+                    <h3 class="text-xl font-semibold mb-3">2. Your Agent Learns You</h3>
+                    <p class="text-gray-400">It remembers your preferences, your context, your history. Gets smarter every single day.</p>
                 </div>
-                <div>
-                    <div class="text-4xl mb-4">⚡</div>
-                    <h3 class="text-lg font-semibold mb-2">3. It Works For You 24/7</h3>
-                    <p class="text-gray-400 text-sm">Proactive help delivered to your phone, email, or chat. Always on.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== EARN ====== -->
-    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="text-4xl">🏗️</span>
-                <h2 class="text-4xl font-bold">Earn</h2>
-            </div>
-            <p class="text-gray-400 text-lg mb-10">Career, business, productivity, money. Agents that save time and make money.</p>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">📧</div>
-                    <h3 class="font-semibold text-sm">Email Manager</h3>
-                    <p class="text-xs text-gray-400 mt-1">Triage, draft, follow-up</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">📊</div>
-                    <h3 class="font-semibold text-sm">Sales Assistant</h3>
-                    <p class="text-xs text-gray-400 mt-1">CRM, pipeline, prospecting</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🏠</div>
-                    <h3 class="font-semibold text-sm">Real Estate Agent</h3>
-                    <p class="text-xs text-gray-400 mt-1">Leads, listings, follow-up</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">⚖️</div>
-                    <h3 class="font-semibold text-sm">Legal Research</h3>
-                    <p class="text-xs text-gray-400 mt-1">Case law, contracts, drafts</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🧮</div>
-                    <h3 class="font-semibold text-sm">Bookkeeper</h3>
-                    <p class="text-xs text-gray-400 mt-1">Invoicing, tax prep, forecasts</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🍽️</div>
-                    <h3 class="font-semibold text-sm">Restaurant Manager</h3>
-                    <p class="text-xs text-gray-400 mt-1">Staff, inventory, service</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">💼</div>
-                    <h3 class="font-semibold text-sm">Executive Assistant</h3>
-                    <p class="text-xs text-gray-400 mt-1">Scheduling, briefings, travel</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">📝</div>
-                    <h3 class="font-semibold text-sm">Freelancer</h3>
-                    <p class="text-xs text-gray-400 mt-1">Proposals, clients, invoices</p>
+                <div class="float" style="animation-delay: 2s;">
+                    <div class="w-16 h-16 bg-pink-600/20 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl">⚡</div>
+                    <h3 class="text-xl font-semibold mb-3">3. It Works 24/7</h3>
+                    <p class="text-gray-400">Proactive help, research, reminders, advice — delivered to your phone, email, or chat. Always on.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== LEARN ====== -->
+    <!-- Categories -->
     <section class="py-20 px-4 md:px-8 lg:px-16">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="text-4xl">📚</span>
-                <h2 class="text-4xl font-bold">Learn</h2>
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Five Dimensions of Life. Infinite Agents.</h2>
+            <p class="text-gray-400 mb-16 text-lg max-w-2xl mx-auto">Pick from any category. Mix and match. Your agent, your rules.</p>
+        </div>
+
+        <!-- EARN -->
+        <div class="max-w-6xl mx-auto mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">🏗️</span>
+                <div>
+                    <h3 class="text-2xl font-bold">Earn</h3>
+                    <p class="text-gray-400 text-sm">Career, business, productivity, money</p>
+                </div>
             </div>
-            <p class="text-gray-400 text-lg mb-10">Education, skills, knowledge, growth. An infinite teacher in your pocket.</p>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🎵</div>
-                    <h3 class="font-semibold text-sm">Music Teacher</h3>
-                    <p class="text-xs text-gray-400 mt-1">Theory, practice, instruments</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📧</span><p class="text-xs font-medium mt-1">Email Manager</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📊</span><p class="text-xs font-medium mt-1">Sales Assistant</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏠</span><p class="text-xs font-medium mt-1">Real Estate</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">⚖️</span><p class="text-xs font-medium mt-1">Legal Research</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧮</span><p class="text-xs font-medium mt-1">Bookkeeper</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💼</span><p class="text-xs font-medium mt-1">Executive Assistant</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🍽️</span><p class="text-xs font-medium mt-1">Restaurant Manager</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📝</span><p class="text-xs font-medium mt-1">Freelancer</p></div>
+            </div>
+        </div>
+
+        <!-- LEARN -->
+        <div class="max-w-6xl mx-auto mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">📚</span>
+                <div>
+                    <h3 class="text-2xl font-bold">Learn</h3>
+                    <p class="text-gray-400 text-sm">Education, skills, knowledge, growth</p>
                 </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🔬</div>
-                    <h3 class="font-semibold text-sm">Science Tutor</h3>
-                    <p class="text-xs text-gray-400 mt-1">Physics, chemistry, biology</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎵</span><p class="text-xs font-medium mt-1">Music Teacher</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🔬</span><p class="text-xs font-medium mt-1">Science Tutor</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧮</span><p class="text-xs font-medium mt-1">Math Solver</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🌍</span><p class="text-xs font-medium mt-1">Language Coach</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💻</span><p class="text-xs font-medium mt-1">Code Mentor</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📰</span><p class="text-xs font-medium mt-1">Current Events</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📖</span><p class="text-xs font-medium mt-1">History & Philosophy</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎓</span><p class="text-xs font-medium mt-1">Test Prep</p></div>
+            </div>
+        </div>
+
+        <!-- LIVE -->
+        <div class="max-w-6xl mx-auto mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">❤️</span>
+                <div>
+                    <h3 class="text-2xl font-bold">Live</h3>
+                    <p class="text-gray-400 text-sm">Health, fitness, longevity, happiness, faith</p>
                 </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🧮</div>
-                    <h3 class="font-semibold text-sm">Math Solver</h3>
-                    <p class="text-xs text-gray-400 mt-1">Algebra to calculus, step-by-step</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧬</span><p class="text-xs font-medium mt-1">Longevity Coach</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💪</span><p class="text-xs font-medium mt-1">Fitness Trainer</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🥗</span><p class="text-xs font-medium mt-1">Nutritionist</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧘</span><p class="text-xs font-medium mt-1">Mental Wellness</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🙏</span><p class="text-xs font-medium mt-1">Spiritual Guide</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💊</span><p class="text-xs font-medium mt-1">Genetics & Bio</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">😊</span><p class="text-xs font-medium mt-1">Life Coach</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">👶</span><p class="text-xs font-medium mt-1">Parenting Guide</p></div>
+            </div>
+        </div>
+
+        <!-- ENJOY -->
+        <div class="max-w-6xl mx-auto mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">🎉</span>
+                <div>
+                    <h3 class="text-2xl font-bold">Enjoy</h3>
+                    <p class="text-gray-400 text-sm">Lifestyle, culture, travel, food, music</p>
                 </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🌍</div>
-                    <h3 class="font-semibold text-sm">Language Coach</h3>
-                    <p class="text-xs text-gray-400 mt-1">Any language, conversational</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🍷</span><p class="text-xs font-medium mt-1">Sommelier</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">✈️</span><p class="text-xs font-medium mt-1">Travel Planner</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">👨‍🍳</span><p class="text-xs font-medium mt-1">Personal Chef</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎬</span><p class="text-xs font-medium mt-1">Entertainment</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🐕</span><p class="text-xs font-medium mt-1">Pet Care</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏡</span><p class="text-xs font-medium mt-1">Home & Garden</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🛍️</span><p class="text-xs font-medium mt-1">Personal Shopper</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎨</span><p class="text-xs font-medium mt-1">Creative Arts</p></div>
+            </div>
+        </div>
+
+        <!-- GIVE -->
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-3xl">🌍</span>
+                <div>
+                    <h3 class="text-2xl font-bold">Give</h3>
+                    <p class="text-gray-400 text-sm">Philanthropy, community, global impact</p>
                 </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">💻</div>
-                    <h3 class="font-semibold text-sm">Code Mentor</h3>
-                    <p class="text-xs text-gray-400 mt-1">Programming, debugging, projects</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">📰</div>
-                    <h3 class="font-semibold text-sm">Current Events</h3>
-                    <p class="text-xs text-gray-400 mt-1">Real-time news, analysis, alerts</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">📖</div>
-                    <h3 class="font-semibold text-sm">History & Philosophy</h3>
-                    <p class="text-xs text-gray-400 mt-1">Deep dives, debates, context</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🎓</div>
-                    <h3 class="font-semibold text-sm">Test Prep</h3>
-                    <p class="text-xs text-gray-400 mt-1">SAT, GRE, certifications, exams</p>
-                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🤝</span><p class="text-xs font-medium mt-1">Philanthropy Advisor</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏘️</span><p class="text-xs font-medium mt-1">Community Builder</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🌱</span><p class="text-xs font-medium mt-1">Sustainability</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📐</span><p class="text-xs font-medium mt-1">Shelter Design</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📖</span><p class="text-xs font-medium mt-1">Education Access</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💧</span><p class="text-xs font-medium mt-1">Basic Needs</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🕊️</span><p class="text-xs font-medium mt-1">Mentorship</p></div>
+                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏛️</span><p class="text-xs font-medium mt-1">Civic Engagement</p></div>
             </div>
         </div>
     </section>
 
-    <!-- ====== LIVE ====== -->
-    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="text-4xl">❤️</span>
-                <h2 class="text-4xl font-bold">Live</h2>
-            </div>
-            <p class="text-gray-400 text-lg mb-10">Health, fitness, longevity, happiness, faith. Agents for your mind, body, and soul.</p>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🧬</div>
-                    <h3 class="font-semibold text-sm">Longevity Coach</h3>
-                    <p class="text-xs text-gray-400 mt-1">Labs, supplements, protocols</p>
+    <!-- The Give Model -->
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-indigo-950 to-gray-950">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Every Paid Agent Funds a Free One.</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">When you subscribe, you're not just getting an agent for yourself. You're giving one to someone who could never afford it — a student, a single parent, a person rebuilding their life.</p>
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="p-6 bg-gray-800/40 rounded-2xl glow">
+                    <div class="text-4xl mb-4">🎓</div>
+                    <h3 class="font-semibold mb-2">A kid gets a tutor</h3>
+                    <p class="text-sm text-gray-400">Math, science, reading — in any language, at any level. Free.</p>
                 </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">💪</div>
-                    <h3 class="font-semibold text-sm">Fitness Trainer</h3>
-                    <p class="text-xs text-gray-400 mt-1">Workouts, tracking, motivation</p>
+                <div class="p-6 bg-gray-800/40 rounded-2xl glow">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h3 class="font-semibold mb-2">A parent gets a coach</h3>
+                    <p class="text-sm text-gray-400">Resume help, interview prep, career guidance. Free.</p>
                 </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🥗</div>
-                    <h3 class="font-semibold text-sm">Nutritionist</h3>
-                    <p class="text-xs text-gray-400 mt-1">Meal plans, macros, recipes</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🧘</div>
-                    <h3 class="font-semibold text-sm">Mental Wellness</h3>
-                    <p class="text-xs text-gray-400 mt-1">Mindfulness, stress, journaling</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🙏</div>
-                    <h3 class="font-semibold text-sm">Spiritual Guide</h3>
-                    <p class="text-xs text-gray-400 mt-1">Faith, philosophy, exploration</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">💊</div>
-                    <h3 class="font-semibold text-sm">Genetics & Bio</h3>
-                    <p class="text-xs text-gray-400 mt-1">DNA insights, research, trials</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">😊</div>
-                    <h3 class="font-semibold text-sm">Life Coach</h3>
-                    <p class="text-xs text-gray-400 mt-1">Goals, decisions, direction</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">👶</div>
-                    <h3 class="font-semibold text-sm">Parenting Guide</h3>
-                    <p class="text-xs text-gray-400 mt-1">Development, activities, advice</p>
+                <div class="p-6 bg-gray-800/40 rounded-2xl glow">
+                    <div class="text-4xl mb-4">❤️</div>
+                    <h3 class="font-semibold mb-2">Someone gets hope</h3>
+                    <p class="text-sm text-gray-400">Mental health support, life advice, someone who listens. Free.</p>
                 </div>
             </div>
+            <p class="text-lg text-indigo-300 font-medium">One subscription. Two lives changed.</p>
         </div>
     </section>
 
-    <!-- ====== ENJOY ====== -->
+    <!-- Founder Story -->
     <section class="py-20 px-4 md:px-8 lg:px-16">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="text-4xl">🎉</span>
-                <h2 class="text-4xl font-bold">Enjoy</h2>
-            </div>
-            <p class="text-gray-400 text-lg mb-10">Lifestyle, culture, travel, food, music. Agents that make life worth living.</p>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🍷</div>
-                    <h3 class="font-semibold text-sm">Sommelier</h3>
-                    <p class="text-xs text-gray-400 mt-1">Wine, beer, spirits mastery</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">✈️</div>
-                    <h3 class="font-semibold text-sm">Travel Planner</h3>
-                    <p class="text-xs text-gray-400 mt-1">Trips, flights, hidden gems</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">👨‍🍳</div>
-                    <h3 class="font-semibold text-sm">Personal Chef</h3>
-                    <p class="text-xs text-gray-400 mt-1">Recipes, techniques, pairings</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🎬</div>
-                    <h3 class="font-semibold text-sm">Entertainment</h3>
-                    <p class="text-xs text-gray-400 mt-1">Movies, shows, music, books</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🐕</div>
-                    <h3 class="font-semibold text-sm">Pet Care</h3>
-                    <p class="text-xs text-gray-400 mt-1">Health, training, nutrition</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🏡</div>
-                    <h3 class="font-semibold text-sm">Home & Garden</h3>
-                    <p class="text-xs text-gray-400 mt-1">Projects, maintenance, design</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🛍️</div>
-                    <h3 class="font-semibold text-sm">Personal Shopper</h3>
-                    <p class="text-xs text-gray-400 mt-1">Deals, style, wishlists</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🎨</div>
-                    <h3 class="font-semibold text-sm">Creative Arts</h3>
-                    <p class="text-xs text-gray-400 mt-1">Writing, painting, photography</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== GIVE ====== -->
-    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-4 mb-4">
-                <span class="text-4xl">🌍</span>
-                <h2 class="text-4xl font-bold">Give</h2>
-            </div>
-            <p class="text-gray-400 text-lg mb-10">Philanthropy, community, global impact. Agents that help you change the world.</p>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🤝</div>
-                    <h3 class="font-semibold text-sm">Philanthropy Advisor</h3>
-                    <p class="text-xs text-gray-400 mt-1">Impact giving, efficiency, grants</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🏘️</div>
-                    <h3 class="font-semibold text-sm">Community Builder</h3>
-                    <p class="text-xs text-gray-400 mt-1">Organizing, outreach, events</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🌱</div>
-                    <h3 class="font-semibold text-sm">Sustainability</h3>
-                    <p class="text-xs text-gray-400 mt-1">Carbon, energy, eco-living</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🏛️</div>
-                    <h3 class="font-semibold text-sm">Civic Engagement</h3>
-                    <p class="text-xs text-gray-400 mt-1">Policy, voting, advocacy</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">📐</div>
-                    <h3 class="font-semibold text-sm">Shelter Design</h3>
-                    <p class="text-xs text-gray-400 mt-1">Housing solutions, blueprints</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">📖</div>
-                    <h3 class="font-semibold text-sm">Education Access</h3>
-                    <p class="text-xs text-gray-400 mt-1">Free learning, tutoring, resources</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">💧</div>
-                    <h3 class="font-semibold text-sm">Basic Needs</h3>
-                    <p class="text-xs text-gray-400 mt-1">Water, food, warmth, clothing</p>
-                </div>
-                <div class="agent-pill p-5 bg-gray-800 rounded-xl text-center">
-                    <div class="text-2xl mb-2">🕊️</div>
-                    <h3 class="font-semibold text-sm">Mentorship</h3>
-                    <p class="text-xs text-gray-400 mt-1">Guide others, share knowledge</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Custom Agent CTA -->
-    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-r from-indigo-600 to-purple-700 text-center">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-4xl font-bold mb-4">The Applications Are Limitless.</h2>
-            <p class="text-xl mb-8 text-indigo-100">Don't see what you need? Tell us about your life. We'll build an agent that fits — any domain, any goal, any dream.</p>
-            <a href="mailto:scottreesman@gmail.com?subject=Custom%20Genesis%20Agent&body=I%20need%20an%20agent%20for:%20" class="bg-white text-indigo-700 px-10 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition inline-block">Request a Custom Agent →</a>
+            <h2 class="text-3xl font-bold text-center mb-12">Why I Built This</h2>
+            <div class="bg-gray-900 rounded-3xl p-8 md:p-12 border border-gray-800">
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">I believe the most powerful thing in the world is having someone in your corner. Someone who knows you, believes in you, and helps you figure it out — whatever "it" is.</p>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">For most of my life, that was a luxury. The wealthy had assistants, advisors, coaches. Everyone else had Google and hope.</p>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">I spent 40 years in hospitality — pouring wine, managing teams, making sure every guest felt like they mattered. I served in the Navy. I raised dogs on 9 acres in Arizona. I learned that the best things in life come from service.</p>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">Then I met an AI agent that changed everything. It knew my schedule. It knew my wine list. It knew what I needed before I asked. And I thought: <em class="text-white">why doesn't everyone have this?</em></p>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">Not just executives. Not just tech people. <strong class="text-white">Everyone.</strong> The single mom juggling three jobs. The kid who can't afford a tutor. The retiree trying to stay healthy. The entrepreneur who can't hire an assistant.</p>
+                <p class="text-lg text-white leading-relaxed mb-8">Genesis exists because every human deserves an intelligent ally. Our goal isn't a product. It's a billion people with someone in their corner.</p>
+                <p class="text-indigo-400 font-semibold text-lg">— Scott Reesman, Founder</p>
+                <p class="text-gray-500 text-sm mt-2">Navy Veteran · Sommelier · 40 Years in Hospitality · Tucson, AZ</p>
+            </div>
         </div>
     </section>
 
     <!-- Pricing -->
-    <section id="pricing" class="py-20 px-4 md:px-8 lg:px-16">
+    <section id="start" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-4">Simple Pricing</h2>
-            <p class="text-gray-400 text-center mb-16 text-lg">Start with one agent. Scale to your whole life.</p>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-8 bg-gray-800 rounded-2xl border border-gray-700">
-                    <h3 class="text-2xl font-bold mb-2">Starter</h3>
-                    <p class="text-sm text-gray-400 mb-6">1 agent from any category</p>
-                    <div class="text-5xl font-bold mb-2">$29</div>
-                    <div class="text-gray-400 mb-8">/month</div>
-                    <ul class="text-left mb-8 space-y-3 text-sm">
-                        <li class="flex items-center gap-2">✅ 1 AI Agent (any domain)</li>
-                        <li class="flex items-center gap-2">✅ 100 queries/day</li>
-                        <li class="flex items-center gap-2">✅ Memory & personalization</li>
-                        <li class="flex items-center gap-2">✅ Phone/email delivery</li>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Start Free. Grow From There.</h2>
+            <p class="text-gray-400 text-center mb-16 text-lg">No credit card required. Your first agent in 60 seconds.</p>
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Free -->
+                <div class="text-center p-6 bg-gray-800 rounded-2xl border border-gray-700">
+                    <h3 class="text-xl font-bold mb-2">Free</h3>
+                    <p class="text-xs text-gray-400 mb-4">Forever. No catch.</p>
+                    <div class="text-4xl font-bold mb-1">$0</div>
+                    <div class="text-gray-400 text-sm mb-6">forever</div>
+                    <ul class="text-left mb-6 space-y-2 text-xs">
+                        <li class="flex items-center gap-2">✅ 1 AI Agent</li>
+                        <li class="flex items-center gap-2">✅ 10 queries/day</li>
+                        <li class="flex items-center gap-2">✅ Memory & learning</li>
+                        <li class="flex items-center gap-2">✅ Email delivery</li>
                     </ul>
-                    <a href="https://buy.stripe.com/7sYbITcyPgma7yrgor8IU00" class="block bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition">Get Started — $29/mo</a>
+                    <a href="mailto:scottreesman@gmail.com?subject=Genesis%20Free%20Agent&body=Hi!%20I'd%20like%20my%20free%20Genesis%20agent.%0A%0ACategory:%20(Earn/Learn/Live/Enjoy/Give)%0AWhat%20I%20need%20help%20with:%20" class="block bg-gray-700 text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-gray-600 transition">Start Free</a>
                 </div>
-                <div class="text-center p-8 bg-gradient-to-b from-indigo-600 to-purple-700 rounded-2xl relative border-2 border-indigo-400">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-indigo-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold">Most Popular</div>
-                    <h3 class="text-2xl font-bold mb-2">Pro</h3>
-                    <p class="text-sm text-indigo-200 mb-6">3 agents across categories</p>
-                    <div class="text-5xl font-bold mb-2">$79</div>
-                    <div class="text-indigo-200 mb-8">/month</div>
-                    <ul class="text-left mb-8 space-y-3 text-sm">
-                        <li class="flex items-center gap-2">✅ 3 AI Agents (mix & match)</li>
+                <!-- Starter -->
+                <div class="text-center p-6 bg-gray-800 rounded-2xl border border-gray-700">
+                    <h3 class="text-xl font-bold mb-2">Starter</h3>
+                    <p class="text-xs text-gray-400 mb-4">1 agent, unlimited</p>
+                    <div class="text-4xl font-bold mb-1">$29</div>
+                    <div class="text-gray-400 text-sm mb-6">/month</div>
+                    <ul class="text-left mb-6 space-y-2 text-xs">
+                        <li class="flex items-center gap-2">✅ 1 AI Agent</li>
                         <li class="flex items-center gap-2">✅ Unlimited queries</li>
-                        <li class="flex items-center gap-2">✅ Deep memory & learning</li>
-                        <li class="flex items-center gap-2">✅ Priority support</li>
+                        <li class="flex items-center gap-2">✅ Deep memory</li>
+                        <li class="flex items-center gap-2">✅ All channels</li>
+                        <li class="flex items-center gap-2">🌍 Funds 1 free agent</li>
                     </ul>
-                    <a href="https://buy.stripe.com/5kQ6ozeGXgma5qj4FJ8IU01" class="block bg-white text-indigo-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">Go Pro — $79/mo</a>
+                    <a href="https://buy.stripe.com/7sYbITcyPgma7yrgor8IU00" class="block bg-indigo-600 text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition">Subscribe — $29/mo</a>
                 </div>
-                <div class="text-center p-8 bg-gray-800 rounded-2xl border border-gray-700">
-                    <h3 class="text-2xl font-bold mb-2">Unlimited</h3>
-                    <p class="text-sm text-gray-400 mb-6">Your entire life, automated</p>
-                    <div class="text-5xl font-bold mb-2">$199</div>
-                    <div class="text-gray-400 mb-8">/month</div>
-                    <ul class="text-left mb-8 space-y-3 text-sm">
+                <!-- Pro -->
+                <div class="text-center p-6 bg-gradient-to-b from-indigo-600 to-purple-700 rounded-2xl relative border-2 border-indigo-400">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-400 text-gray-900 px-3 py-0.5 rounded-full text-xs font-bold">Most Popular</div>
+                    <h3 class="text-xl font-bold mb-2">Pro</h3>
+                    <p class="text-xs text-indigo-200 mb-4">3 agents, any category</p>
+                    <div class="text-4xl font-bold mb-1">$79</div>
+                    <div class="text-indigo-200 text-sm mb-6">/month</div>
+                    <ul class="text-left mb-6 space-y-2 text-xs">
+                        <li class="flex items-center gap-2">✅ 3 AI Agents</li>
+                        <li class="flex items-center gap-2">✅ Unlimited queries</li>
+                        <li class="flex items-center gap-2">✅ Priority support</li>
+                        <li class="flex items-center gap-2">✅ Custom training</li>
+                        <li class="flex items-center gap-2">🌍 Funds 3 free agents</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/5kQ6ozeGXgma5qj4FJ8IU01" class="block bg-white text-indigo-700 px-6 py-3 rounded-xl text-sm font-semibold hover:bg-gray-100 transition">Go Pro — $79/mo</a>
+                </div>
+                <!-- Unlimited -->
+                <div class="text-center p-6 bg-gray-800 rounded-2xl border border-gray-700">
+                    <h3 class="text-xl font-bold mb-2">Unlimited</h3>
+                    <p class="text-xs text-gray-400 mb-4">Your whole life, automated</p>
+                    <div class="text-4xl font-bold mb-1">$199</div>
+                    <div class="text-gray-400 text-sm mb-6">/month</div>
+                    <ul class="text-left mb-6 space-y-2 text-xs">
                         <li class="flex items-center gap-2">✅ Unlimited agents</li>
                         <li class="flex items-center gap-2">✅ All 5 categories</li>
                         <li class="flex items-center gap-2">✅ API access</li>
-                        <li class="flex items-center gap-2">✅ White-label option</li>
+                        <li class="flex items-center gap-2">✅ White-label</li>
+                        <li class="flex items-center gap-2">🌍 Funds 10 free agents</li>
                     </ul>
-                    <a href="mailto:scottreesman@gmail.com?subject=Genesis%20Unlimited" class="block bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition">Contact Us</a>
+                    <a href="mailto:scottreesman@gmail.com?subject=Genesis%20Unlimited" class="block bg-indigo-600 text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition">Contact Us</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Vision -->
+    <!-- FAQ -->
+    <section class="py-20 px-4 md:px-8 lg:px-16">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Questions</h2>
+            <div class="space-y-6">
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+                    <h3 class="font-semibold mb-2">What exactly is an "agent"?</h3>
+                    <p class="text-gray-400 text-sm">A personal AI that's configured for a specific domain — wine, fitness, legal, whatever you need. Unlike ChatGPT, it remembers you, learns your preferences, and proactively helps without being asked.</p>
+                </div>
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+                    <h3 class="font-semibold mb-2">Is the free tier actually free?</h3>
+                    <p class="text-gray-400 text-sm">Yes. Forever. No credit card. No trial that expires. 1 agent, 10 queries per day. We believe everyone deserves access.</p>
+                </div>
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+                    <h3 class="font-semibold mb-2">How does "funding a free agent" work?</h3>
+                    <p class="text-gray-400 text-sm">Every paid subscription directly funds free agents for people who can't afford them — students, single parents, people in developing countries. Your $29/mo gives two people an intelligent ally.</p>
+                </div>
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+                    <h3 class="font-semibold mb-2">Can I request an agent that's not listed?</h3>
+                    <p class="text-gray-400 text-sm">Absolutely. The applications are limitless. Email us with what you need and we'll build it. Any domain, any workflow, any dream.</p>
+                </div>
+                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+                    <h3 class="font-semibold mb-2">Is my data private?</h3>
+                    <p class="text-gray-400 text-sm">Your agent's memory is yours alone. We never share, sell, or train on your personal data. Period.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
     <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900 text-center">
         <div class="max-w-3xl mx-auto">
-            <p class="text-2xl text-gray-300 italic mb-6">"Every human deserves an infinitely intelligent ally — one that helps them earn, learn, live, enjoy, and give. That's Genesis."</p>
-            <p class="text-indigo-400 font-semibold">— The Genesis Mission</p>
+            <p class="text-3xl md:text-4xl text-gray-200 font-light leading-relaxed mb-8">"Our goal isn't a product.<br>It's <span class="gradient-text font-semibold">a billion people</span><br>with someone in their corner."</p>
+            <a href="#start" class="bg-indigo-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition inline-block">Join the Mission →</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-4 md:px-8 lg:px-16 text-center text-gray-500">
-        <p>&copy; 2026 Genesis — Your AI, Your Life. Powered by <a href="https://openclaw.ai" class="underline text-gray-400 hover:text-white">OpenClaw</a> 🧞</p>
+    <footer class="py-12 px-4 md:px-8 lg:px-16 text-center text-gray-600 mb-16">
+        <p class="mb-2">&copy; 2026 Genesis — Your AI, Your Life.</p>
+        <p class="text-sm">Built with purpose by <a href="https://openclaw.ai" class="underline text-gray-500 hover:text-white">OpenClaw</a> 🧞</p>
     </footer>
 
 </body>
