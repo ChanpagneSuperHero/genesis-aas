@@ -320,3 +320,33 @@ API prices are falling 50–70% per year. Models that cost $15/M tokens in 2023 
 ---
 
 *Sources: groq.com/pricing, platform.moonshot.ai, deepseek.ai/pricing, openai.com/api/pricing, anthropic.com/pricing, ai.google.dev/gemini-api/docs/pricing, mistral.ai/pricing, intuitionlabs.ai, pricepertoken.com — March 2026*
+
+
+---
+
+## Addendum: The Local Hosting Revolution (March 4, 2026)
+
+Peter Diamandis featured Alex Finn running OpenClaw with 4 Mac Studios (1.5TB unified memory) hosting Qwen 3.5 and MiniMax 2.5 locally. Zero API fees. This introduces a FOURTH cost tier for Genesis:
+
+### Updated Model Stack for Genesis
+
+| Tier | Model Location | Models | Cost per User/Month | Use Case |
+|------|---------------|--------|-------------------|----------|
+| Free | Cloud (API) | DeepSeek V3 / Gemini Flash | $0.30-0.60 | 1 partner, 10 queries/day |
+| Starter ($29) | Cloud (API) | Kimi K2.5 / Claude Haiku | $2-4 | 1 partner, unlimited |
+| Pro ($79) | Cloud (API) | Claude Sonnet / GPT-4o | $6-10 | 3 partners, priority |
+| **Local (future)** | **User's Mac Mini** | **Qwen 3.5 / MiniMax / Llama** | **$0** | **Unlimited, private, offline-capable** |
+
+### Local Hosting Economics
+- Mac Mini M4 (24GB): ~$600 — runs 7-14B parameter models well
+- Mac Mini M4 Pro (48GB): ~$1,600 — runs 30-70B parameter models
+- Mac Studio M4 Ultra (192GB): ~$4,000+ — runs 400B+ parameter models
+- After hardware purchase: $0/month in AI costs (electricity only)
+- Break-even vs Pro tier ($79/mo): Mac Mini pays for itself in 8 months
+
+### Genesis "Own Your Intelligence" Tier (Future)
+- Guide users through Mac Mini setup with open-weight models
+- Pre-configured Genesis partner templates
+- Offline-capable (works without internet)
+- Maximum privacy (data never leaves your device)
+- Potential Apple affiliate revenue for Genesis
