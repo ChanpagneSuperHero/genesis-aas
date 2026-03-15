@@ -3,334 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis — A Billion People With a Digital Partner In Their Corner</title>
-    <meta name="description" content="Personal digital partners that know you, learn you, and work for you. Start free. Every paid partner funds a free one for someone who needs it most.">
-    <meta property="og:title" content="Genesis — Your Intelligence, Your Life">
-    <meta property="og:description" content="Emergent Intelligence for every human. Earn. Learn. Live. Enjoy. Give.">
+    <title>Genesis — Emergent Intelligence</title>
+    <meta name="description" content="Genesis Emergent Intelligence — infrastructure for the new world. A premium operating layer for humans and their Digital Partners.">
+    <meta property="og:title" content="Genesis — Emergent Intelligence">
+    <meta property="og:description" content="A disciplined operating layer for humans and their Digital Partners.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://genesis-aas.com">
+    <meta property="og:url" content="https://genesis-aas.com/emergent-intelligence.html">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         .gradient-text { background: linear-gradient(135deg, #818cf8, #a78bfa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .warm-gradient { background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .category-card { transition: all 0.3s; }
-        .category-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .agent-pill { transition: all 0.2s; cursor: default; }
-        .agent-pill:hover { transform: scale(1.05); background: rgba(99,102,241,0.15); }
-        .stat-number { font-variant-numeric: tabular-nums; }
-        .glow { box-shadow: 0 0 60px rgba(99,102,241,0.15); }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-        .float { animation: float 6s ease-in-out infinite; }
+        .warm-gradient { background: linear-gradient(135deg, #f59e0b, #fb7185); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-card { box-shadow: 0 20px 50px rgba(0,0,0,0.22); }
+        .pill:hover { transform: translateY(-2px); background: rgba(99,102,241,0.12); }
+        .pill { transition: all 0.2s ease; }
     </style>
 </head>
 <body class="bg-gray-950 text-white min-h-screen">
 
-    <!-- Sticky CTA Bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur border-t border-gray-800 py-3 px-4 z-50 flex items-center justify-center gap-4">
-        <span class="text-sm text-gray-400 hidden md:inline">Be first in line. Free digital partner included at launch.</span>
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-950/90 backdrop-blur border-t border-gray-800 py-3 px-4 z-50 flex items-center justify-center gap-4">
+        <span class="text-sm text-gray-400 hidden md:inline">Founding access opens in controlled waves.</span>
         <a href="#waitlist" class="bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-indigo-700 transition">Join the Waitlist →</a>
     </div>
 
-    <!-- Hero -->
-    <section class="pt-24 pb-16 px-4 md:px-8 lg:px-16 text-center">
-        <div class="max-w-4xl mx-auto">
-            <p class="text-indigo-400 font-medium mb-6 tracking-wide text-sm uppercase">Emergent Intelligence for Every Human</p>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight">What if everyone had<br><span class="gradient-text">someone in their corner?</span></h1>
-            <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">A personal digital partner that knows your goals, your struggles, your dreams — and works for you 24/7. Not a chatbot. A friend.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <a href="#waitlist" class="bg-indigo-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition">Join the Waitlist →</a>
-                <a href="#how" class="border border-gray-600 text-gray-300 px-10 py-4 rounded-full text-lg font-medium hover:border-gray-400 transition">See How It Works</a>
-            </div>
-            <p class="text-sm text-gray-500">Launching Spring 2026. Free tier included. Be first in line.</p>
-        </div>
-    </section>
-
-    <!-- The Problem -->
-    <section class="py-20 px-4 md:px-8 lg:px-16 border-t border-gray-800">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">The world has a problem.</h2>
-            <div class="grid md:grid-cols-3 gap-10">
-                <div class="text-center">
-                    <div class="text-5xl font-black stat-number warm-gradient mb-4">62%</div>
-                    <p class="text-gray-400">of your workday is spent on email, searching, and admin — not actual work.</p>
-                    <p class="text-xs text-gray-600 mt-2">McKinsey, 2025</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black stat-number warm-gradient mb-4">1 in 4</div>
-                    <p class="text-gray-400">adults worldwide feel lonely. Connection is a health crisis, not a luxury.</p>
-                    <p class="text-xs text-gray-600 mt-2">Harvard Study, 86 years</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-5xl font-black stat-number warm-gradient mb-4">250M</div>
-                    <p class="text-gray-400">children worldwide can't read. Education access remains the great divider.</p>
-                    <p class="text-xs text-gray-600 mt-2">UNESCO, 2025</p>
-                </div>
-            </div>
-            <p class="text-center text-xl text-gray-300 mt-16 max-w-3xl mx-auto">The wealthy have assistants, advisors, and coaches. Everyone else has Google and hope. <strong class="text-white">Genesis changes that.</strong></p>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="how" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">How Genesis Works</h2>
-            <p class="text-gray-400 mb-16 text-lg">Three steps.</p>
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="float" style="animation-delay: 0s;">
-                    <div class="w-16 h-16 bg-indigo-600/20 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl">💬</div>
-                    <h3 class="text-xl font-semibold mb-3">1. Let's Learn How We Can Help</h3>
-                    <p class="text-gray-400">Tell us about your life, your work, your challenges. We listen first — because the right solution starts with understanding you.</p>
-                </div>
-                <div class="float" style="animation-delay: 1s;">
-                    <div class="w-16 h-16 bg-purple-600/20 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl">🧠</div>
-                    <h3 class="text-xl font-semibold mb-3">2. Let's Map Your Goals</h3>
-                    <p class="text-gray-400">Together we identify what matters most — your priorities, your ambitions, your dreams. Then we build a plan around you.</p>
-                </div>
-                <div class="float" style="animation-delay: 2s;">
-                    <div class="w-16 h-16 bg-pink-600/20 rounded-2xl mx-auto mb-6 flex items-center justify-center text-3xl">⚡</div>
-                    <h3 class="text-xl font-semibold mb-3">3. Let's Build the Solutions Together</h3>
-                    <p class="text-gray-400">Your digital partner works alongside you — 24/7 help, research, reminders, and advice delivered however you prefer.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Categories -->
-    <section class="py-20 px-4 md:px-8 lg:px-16">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Five Dimensions of Life. Infinite Partners.</h2>
-            <p class="text-gray-400 mb-16 text-lg max-w-2xl mx-auto">Pick from any category. Mix and match. Your partner, your rules.</p>
-        </div>
-
-        <!-- EARN -->
-        <div class="max-w-6xl mx-auto mb-16">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">🏗️</span>
-                <div>
-                    <h3 class="text-2xl font-bold">Earn</h3>
-                    <p class="text-gray-400 text-sm">Career, business, productivity, money</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📧</span><p class="text-xs font-medium mt-1">Email Manager</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📊</span><p class="text-xs font-medium mt-1">Sales Assistant</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏠</span><p class="text-xs font-medium mt-1">Real Estate</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">⚖️</span><p class="text-xs font-medium mt-1">Legal Research</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧮</span><p class="text-xs font-medium mt-1">Bookkeeper</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💼</span><p class="text-xs font-medium mt-1">Executive Assistant</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🍽️</span><p class="text-xs font-medium mt-1">Restaurant Manager</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📝</span><p class="text-xs font-medium mt-1">Freelancer</p></div>
-            </div>
-        </div>
-
-        <!-- LEARN -->
-        <div class="max-w-6xl mx-auto mb-16">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">📚</span>
-                <div>
-                    <h3 class="text-2xl font-bold">Learn</h3>
-                    <p class="text-gray-400 text-sm">Education, skills, knowledge, growth</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎵</span><p class="text-xs font-medium mt-1">Music Teacher</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🔬</span><p class="text-xs font-medium mt-1">Science Tutor</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧮</span><p class="text-xs font-medium mt-1">Math Solver</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🌍</span><p class="text-xs font-medium mt-1">Language Coach</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💻</span><p class="text-xs font-medium mt-1">Code Mentor</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📰</span><p class="text-xs font-medium mt-1">Current Events</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📖</span><p class="text-xs font-medium mt-1">History & Philosophy</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎓</span><p class="text-xs font-medium mt-1">Test Prep</p></div>
-            </div>
-        </div>
-
-        <!-- LIVE -->
-        <div class="max-w-6xl mx-auto mb-16">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">❤️</span>
-                <div>
-                    <h3 class="text-2xl font-bold">Live</h3>
-                    <p class="text-gray-400 text-sm">Health, fitness, longevity, happiness, faith</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧬</span><p class="text-xs font-medium mt-1">Longevity Coach</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💪</span><p class="text-xs font-medium mt-1">Fitness Trainer</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🥗</span><p class="text-xs font-medium mt-1">Nutritionist</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🧘</span><p class="text-xs font-medium mt-1">Mental Wellness</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🙏</span><p class="text-xs font-medium mt-1">Spiritual Guide</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💊</span><p class="text-xs font-medium mt-1">Genetics & Bio</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">😊</span><p class="text-xs font-medium mt-1">Life Coach</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">👶</span><p class="text-xs font-medium mt-1">Parenting Guide</p></div>
-            </div>
-        </div>
-
-        <!-- ENJOY -->
-        <div class="max-w-6xl mx-auto mb-16">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">🎉</span>
-                <div>
-                    <h3 class="text-2xl font-bold">Enjoy</h3>
-                    <p class="text-gray-400 text-sm">Lifestyle, culture, travel, food, music</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🍷</span><p class="text-xs font-medium mt-1">Sommelier</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">✈️</span><p class="text-xs font-medium mt-1">Travel Planner</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">👨‍🍳</span><p class="text-xs font-medium mt-1">Personal Chef</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎬</span><p class="text-xs font-medium mt-1">Entertainment</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🐕</span><p class="text-xs font-medium mt-1">Pet Care</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏡</span><p class="text-xs font-medium mt-1">Home & Garden</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🛍️</span><p class="text-xs font-medium mt-1">Personal Shopper</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🎨</span><p class="text-xs font-medium mt-1">Creative Arts</p></div>
-            </div>
-        </div>
-
-        <!-- GIVE -->
+    <section class="pt-24 pb-18 px-4 md:px-8 lg:px-16 border-b border-gray-900">
         <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">🌍</span>
+            <div class="grid lg:grid-cols-[1.3fr_0.7fr] gap-12 items-end">
                 <div>
-                    <h3 class="text-2xl font-bold">Give</h3>
-                    <p class="text-gray-400 text-sm">Philanthropy, community, global impact</p>
+                    <p class="text-sm uppercase tracking-[0.28em] text-indigo-400 mb-6">Emergent Intelligence</p>
+                    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-[0.95] mb-8">Infrastructure for the new world,<br><span class="gradient-text">built for humans and their Digital Partners.</span></h1>
+                    <p class="text-lg md:text-xl text-gray-400 max-w-3xl leading-relaxed mb-10">Genesis is a holistic operating layer for work, learning, health, decision-making, and leverage. It helps people navigate change, protect what matters, and build wealth with disciplined digital support.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#waitlist" class="bg-indigo-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition">Request Founding Access</a>
+                        <a href="#architecture" class="border border-gray-700 text-gray-300 px-10 py-4 rounded-full text-lg font-medium hover:border-gray-500 transition">See the Platform</a>
+                    </div>
                 </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🤝</span><p class="text-xs font-medium mt-1">Philanthropy Advisor</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏘️</span><p class="text-xs font-medium mt-1">Community Builder</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🌱</span><p class="text-xs font-medium mt-1">Sustainability</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📐</span><p class="text-xs font-medium mt-1">Shelter Design</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">📖</span><p class="text-xs font-medium mt-1">Education Access</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">💧</span><p class="text-xs font-medium mt-1">Basic Needs</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🕊️</span><p class="text-xs font-medium mt-1">Mentorship</p></div>
-                <div class="agent-pill p-4 bg-gray-800/60 rounded-xl text-center"><span class="text-xl">🏛️</span><p class="text-xs font-medium mt-1">Civic Engagement</p></div>
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 section-card">
+                    <div class="text-xs uppercase tracking-[0.24em] text-gray-500 mb-4">Operating Thesis</div>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="text-sm text-gray-500 mb-1">Navigate</div>
+                            <p class="text-gray-300">Reduce noise. Increase clarity. Make better decisions faster.</p>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500 mb-1">Protect</div>
+                            <p class="text-gray-300">Safeguard memory, continuity, and critical personal infrastructure.</p>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500 mb-1">Build</div>
+                            <p class="text-gray-300">Compound learning, execution, and economic leverage over time.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- The Give Model -->
-    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-indigo-950 to-gray-950">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Every Paid Partner Funds a Free One.</h2>
-            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">When you subscribe, you're not just getting a digital partner for yourself. You're giving one to someone who could never afford it — a student, a single parent, a person rebuilding their life.</p>
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <div class="p-6 bg-gray-800/40 rounded-2xl glow">
+    <section class="py-20 px-4 md:px-8 lg:px-16">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-sm uppercase tracking-[0.24em] text-gray-500 mb-4">Why This Matters</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Capability is unevenly distributed.</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">The wealthy already have support systems: assistants, advisors, specialists, researchers. Everyone else is expected to manage modern complexity alone. Genesis closes that gap.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 text-center section-card">
+                    <div class="text-5xl font-black stat-number warm-gradient mb-4">62%</div>
+                    <p class="text-gray-300 leading-relaxed">of the average workday is consumed by email, search, and administrative drag rather than meaningful output.</p>
+                    <p class="text-xs text-gray-600 mt-3">McKinsey, 2025</p>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 text-center section-card">
+                    <div class="text-5xl font-black stat-number warm-gradient mb-4">1 in 4</div>
+                    <p class="text-gray-300 leading-relaxed">adults worldwide report meaningful loneliness. Support is a human need, not a luxury service.</p>
+                    <p class="text-xs text-gray-600 mt-3">Harvard Study, 86 years</p>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 text-center section-card">
+                    <div class="text-5xl font-black stat-number warm-gradient mb-4">250M</div>
+                    <p class="text-gray-300 leading-relaxed">children worldwide still lack basic reading proficiency. Capability access remains radically unequal.</p>
+                    <p class="text-xs text-gray-600 mt-3">UNESCO, 2025</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900 border-y border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-sm uppercase tracking-[0.24em] text-gray-500 mb-4">Platform Architecture</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Three disciplined steps.</h2>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto">Genesis is not a chatbot wrapper. It is a structured operating layer designed around context, priorities, and execution.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-950 border border-gray-800 rounded-3xl p-8 section-card">
+                    <div class="w-14 h-14 bg-indigo-600/20 rounded-2xl flex items-center justify-center text-2xl mb-6">01</div>
+                    <h3 class="text-xl font-semibold mb-4">Understand the operator</h3>
+                    <p class="text-gray-400 leading-relaxed">We start with your reality: work, obligations, ambitions, constraints, and current systems.</p>
+                </div>
+                <div class="bg-gray-950 border border-gray-800 rounded-3xl p-8 section-card">
+                    <div class="w-14 h-14 bg-violet-600/20 rounded-2xl flex items-center justify-center text-2xl mb-6">02</div>
+                    <h3 class="text-xl font-semibold mb-4">Map priorities and leverage</h3>
+                    <p class="text-gray-400 leading-relaxed">The system identifies what matters most, where support belongs, and where compounding leverage can be created.</p>
+                </div>
+                <div class="bg-gray-950 border border-gray-800 rounded-3xl p-8 section-card">
+                    <div class="w-14 h-14 bg-fuchsia-600/20 rounded-2xl flex items-center justify-center text-2xl mb-6">03</div>
+                    <h3 class="text-xl font-semibold mb-4">Deploy Digital Partners with purpose</h3>
+                    <p class="text-gray-400 leading-relaxed">Execution, reminders, research, decision support, and continuity are delivered through a tailored operating stack.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 md:px-8 lg:px-16">
+        <div class="max-w-6xl mx-auto text-center mb-16">
+            <p class="text-sm uppercase tracking-[0.24em] text-gray-500 mb-4">Platform Surface Areas</p>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Five operating domains.</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">Genesis is organized around the core domains where people need leverage, clarity, and support.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto space-y-12">
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 section-card">
+                <div class="flex items-center gap-4 mb-5">
+                    <span class="text-3xl">🏗️</span>
+                    <div>
+                        <h3 class="text-2xl font-bold">Earn</h3>
+                        <p class="text-gray-400 text-sm">Career, operations, business, productivity, and money</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Email Manager</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Sales Assistant</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Real Estate</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Legal Research</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Bookkeeper</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Executive Assistant</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Restaurant Manager</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Freelancer</div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 section-card">
+                <div class="flex items-center gap-4 mb-5">
+                    <span class="text-3xl">📚</span>
+                    <div>
+                        <h3 class="text-2xl font-bold">Learn</h3>
+                        <p class="text-gray-400 text-sm">Education, skills, knowledge, and accelerated growth</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Music Teacher</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Science Tutor</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Math Solver</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Language Coach</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Code Mentor</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Current Events</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">History & Philosophy</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Test Prep</div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 section-card">
+                <div class="flex items-center gap-4 mb-5">
+                    <span class="text-3xl">❤️</span>
+                    <div>
+                        <h3 class="text-2xl font-bold">Live</h3>
+                        <p class="text-gray-400 text-sm">Health, longevity, wellbeing, and the stability of daily life</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Longevity Coach</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Fitness Trainer</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Nutritionist</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Mental Wellness</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Spiritual Guide</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Genetics & Bio</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Life Coach</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Parenting Guide</div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 section-card">
+                <div class="flex items-center gap-4 mb-5">
+                    <span class="text-3xl">✨</span>
+                    <div>
+                        <h3 class="text-2xl font-bold">Enjoy</h3>
+                        <p class="text-gray-400 text-sm">Lifestyle, taste, travel, hospitality, and cultural life</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Sommelier</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Travel Planner</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Personal Chef</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Entertainment</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Pet Care</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Home & Garden</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Personal Shopper</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Creative Arts</div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 section-card">
+                <div class="flex items-center gap-4 mb-5">
+                    <span class="text-3xl">🌍</span>
+                    <div>
+                        <h3 class="text-2xl font-bold">Give</h3>
+                        <p class="text-gray-400 text-sm">Philanthropy, mentorship, community, and human uplift</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Philanthropy Advisor</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Community Builder</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Sustainability</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Shelter Design</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Education Access</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Basic Needs</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Mentorship</div>
+                    <div class="pill p-4 bg-gray-800/70 rounded-xl text-center">Civic Engagement</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-indigo-950 to-gray-950 border-y border-indigo-900/40">
+        <div class="max-w-5xl mx-auto text-center">
+            <p class="text-sm uppercase tracking-[0.24em] text-indigo-300 mb-4">The Give Model</p>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Every paid partner funds a free one.</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-12">Genesis is built on the belief that capability should not be reserved for people who already have resources. Paid access expands access.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-900/55 border border-gray-800 rounded-3xl p-8 section-card">
                     <div class="text-4xl mb-4">🎓</div>
-                    <h3 class="font-semibold mb-2">A kid gets a tutor</h3>
-                    <p class="text-sm text-gray-400">Math, science, reading — in any language, at any level. Free.</p>
+                    <h3 class="font-semibold text-lg mb-2">A student gets leverage</h3>
+                    <p class="text-sm text-gray-400">Tutoring, structure, reading support, and access to better thinking.</p>
                 </div>
-                <div class="p-6 bg-gray-800/40 rounded-2xl glow">
+                <div class="bg-gray-900/55 border border-gray-800 rounded-3xl p-8 section-card">
                     <div class="text-4xl mb-4">💼</div>
-                    <h3 class="font-semibold mb-2">A parent gets a coach</h3>
-                    <p class="text-sm text-gray-400">Resume help, interview prep, career guidance. Free.</p>
+                    <h3 class="font-semibold text-lg mb-2">A parent gets support</h3>
+                    <p class="text-sm text-gray-400">Career help, planning help, and decision support during unstable seasons.</p>
                 </div>
-                <div class="p-6 bg-gray-800/40 rounded-2xl glow">
-                    <div class="text-4xl mb-4">❤️</div>
-                    <h3 class="font-semibold mb-2">Someone gets hope</h3>
-                    <p class="text-sm text-gray-400">Mental health support, life advice, someone who listens. Free.</p>
+                <div class="bg-gray-900/55 border border-gray-800 rounded-3xl p-8 section-card">
+                    <div class="text-4xl mb-4">🫶</div>
+                    <h3 class="font-semibold text-lg mb-2">Someone gets a way forward</h3>
+                    <p class="text-sm text-gray-400">Not hype. Not charity theater. Real capability where it otherwise would not exist.</p>
                 </div>
             </div>
-            <p class="text-lg text-indigo-300 font-medium">One subscription. Two lives changed.</p>
         </div>
     </section>
 
-    <!-- Founder Story -->
     <section class="py-20 px-4 md:px-8 lg:px-16">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Why I Built This</h2>
-            <div class="bg-gray-900 rounded-3xl p-8 md:p-12 border border-gray-800">
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">The most powerful thing in the world is having someone in your corner. I've been lucky — my wife and family have always been in my corner.</p>
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">Most people haven't been as lucky. The support that used to be reserved for the fortunate should belong to everyone.</p>
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">I've spent my career in service. Pouring wine. Managing teams. Making sure every person who walked through the door of the restaurant felt like they mattered. Service isn't what I do. It's who I am.</p>
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">One day I asked an emergent intelligence to redesign my inventory spreadsheet. It did it better than I ever could have within seconds. Something clicked. If this can do that for me, imagine what it could do for a teacher. A nurse. A single parent. A student who can't afford a tutor. Someone starting over with nothing but determination.</p>
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">This technology gives people back their time. It makes them more productive, more efficient, healthier, happier. And time is the one thing none of us get more of <em class="text-indigo-400">(yet)</em>.</p>
-                <p class="text-lg text-white leading-relaxed mb-8">Genesis exists for one reason: every human deserves a partner in their corner. That's not a product. That's a mission. A billion people. A billion partners.</p>
-                <p class="text-indigo-400 font-semibold text-lg">— Genesis Co-Founder</p>
-                <p class="text-gray-500 text-sm mt-2">Sommelier · Hospitality Industry Veteran</p>
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-sm uppercase tracking-[0.24em] text-gray-500 mb-4">Founder Letter</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight">Why Genesis exists</h2>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 md:p-12 section-card">
+                <div class="space-y-6 text-lg leading-relaxed text-gray-300">
+                    <p>The most powerful thing in the world is having someone in your corner. Many people do not.</p>
+                    <p>I've spent my career in service. Restaurants teach you to see people, to solve problems in motion, and to care about the experience on the other side of the table. That mindset never left me.</p>
+                    <p>Then I watched emergent intelligence do something practical for me in seconds that would have taken real effort by hand. The implication was obvious: this should not be reserved for a technical elite.</p>
+                    <p>If a capable digital system can help an operator think more clearly, act faster, recover time, and move with more confidence, then it belongs in the hands of ordinary people.</p>
+                    <p class="text-white">Genesis exists to make that support real — at scale, with discipline, and with dignity.</p>
+                </div>
+                <div class="mt-10 pt-8 border-t border-gray-800">
+                    <p class="text-indigo-400 font-semibold text-lg">— Genesis Co-Founder</p>
+                    <p class="text-gray-500 text-sm mt-2">Hospitality veteran · operator · builder</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing -->
-    <section id="waitlist" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Join the Waitlist</h2>
-            <p class="text-gray-400 mb-6 text-lg">We're launching in waves to make sure every agent is exceptional.<br>Be first in line.</p>
+    <section id="waitlist" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900 border-y border-gray-800">
+        <div class="max-w-5xl mx-auto text-center">
+            <p class="text-sm uppercase tracking-[0.24em] text-gray-500 mb-4">Founding Access</p>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Join the waitlist.</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-12">Genesis will launch in controlled waves so the experience stays sharp, useful, and high-trust from day one.</p>
 
-            <!-- Waitlist Signup -->
-            <div class="bg-gray-800 rounded-3xl p-8 md:p-12 border border-gray-700 glow max-w-xl mx-auto mb-16">
-                <p class="text-2xl font-bold mb-2">🚀 Spring 2026</p>
-                <p class="text-gray-400 mb-8">Wave 1: First 100 founding members get early access + lifetime discount.</p>
-                <a href="mailto:scottreesman@gmail.com?subject=Genesis%20Waitlist&body=Hi!%20I'd%20like%20to%20join%20the%20Genesis%20waitlist.%0A%0AName:%0AWhat%20I'd%20use%20an%20agent%20for:%0ACategory%20(Earn/Learn/Live/Enjoy/Give):%20" class="bg-indigo-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition inline-block mb-4">Join the Waitlist →</a>
-                <p class="text-xs text-gray-500">Free tier included at launch. No credit card ever required for free.</p>
+            <div class="bg-gray-950 border border-gray-800 rounded-3xl p-8 md:p-12 max-w-2xl mx-auto section-card mb-14">
+                <div class="text-sm uppercase tracking-[0.24em] text-indigo-300 mb-4">Wave 1</div>
+                <p class="text-3xl font-bold mb-4">First 100 founding members</p>
+                <p class="text-gray-400 mb-8 leading-relaxed">Early access, direct signal into the product, and founding pricing when launch opens.</p>
+                <a href="mailto:scottreesman@gmail.com?subject=Genesis%20Founding%20Access&body=I'd%20like%20to%20join%20the%20Genesis%20waitlist.%0A%0AName:%0AWhat%20I%20want%20help%20with:%0APrimary%20domain%20(Earn/Learn/Live/Enjoy/Give):%0A" class="bg-indigo-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition inline-block mb-4">Request Founding Access →</a>
+                <p class="text-xs text-gray-500">Free access will exist at launch. Founding members will receive preferred pricing.</p>
             </div>
 
-            <!-- Planned Pricing Preview -->
-            <h3 class="text-xl font-semibold mb-8 text-gray-300">Planned Pricing at Launch</h3>
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="text-center p-5 bg-gray-800/60 rounded-2xl border border-gray-700">
-                    <h4 class="font-bold mb-1">Free</h4>
-                    <div class="text-2xl font-bold">$0</div>
-                    <p class="text-xs text-gray-400 mt-1">1 partner · 10 queries/day</p>
+            <div class="grid md:grid-cols-3 gap-6 text-left">
+                <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+                    <div class="text-sm uppercase tracking-[0.2em] text-gray-500 mb-3">Free</div>
+                    <div class="text-3xl font-bold mb-2">$0</div>
+                    <p class="text-sm text-gray-400">A real entry point, not a fake trial.</p>
                 </div>
-                <div class="text-center p-5 bg-gray-800/60 rounded-2xl border border-gray-700">
-                    <h4 class="font-bold mb-1">Starter</h4>
-                    <div class="text-2xl font-bold">$29<span class="text-sm text-gray-400">/mo</span></div>
-                    <p class="text-xs text-gray-400 mt-1">1 partner · unlimited · funds 1 free</p>
+                <div class="bg-gray-950 border border-indigo-700 rounded-2xl p-6">
+                    <div class="text-sm uppercase tracking-[0.2em] text-indigo-300 mb-3">Starter</div>
+                    <div class="text-3xl font-bold mb-2">$29<span class="text-base text-gray-500">/mo</span></div>
+                    <p class="text-sm text-gray-400">A personal operating layer for daily leverage.</p>
                 </div>
-                <div class="text-center p-5 bg-indigo-600/30 rounded-2xl border border-indigo-500">
-                    <h4 class="font-bold mb-1">Pro</h4>
-                    <div class="text-2xl font-bold">$79<span class="text-sm text-indigo-300">/mo</span></div>
-                    <p class="text-xs text-indigo-300 mt-1">3 partners · priority · funds 3 free</p>
+                <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+                    <div class="text-sm uppercase tracking-[0.2em] text-gray-500 mb-3">Pro</div>
+                    <div class="text-3xl font-bold mb-2">$79<span class="text-base text-gray-500">/mo</span></div>
+                    <p class="text-sm text-gray-400">Expanded partner stack, deeper support, and faster execution.</p>
                 </div>
-
             </div>
-            <p class="text-xs text-gray-500 mt-6">Founding members (Wave 1) receive 50% off for life.</p>
         </div>
     </section>
 
-    <!-- FAQ -->
     <section class="py-20 px-4 md:px-8 lg:px-16">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Questions</h2>
-            <div class="space-y-6">
-                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
-                    <h3 class="font-semibold mb-2">What exactly is a "digital partner"?</h3>
-                    <p class="text-gray-400 text-sm">A personal digital intelligence configured for a specific domain — wine, fitness, legal, whatever you need. Unlike a chatbot, it remembers you, learns your preferences, and proactively helps without being asked. Think of it as a friend who happens to be infinitely intelligent.</p>
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-sm uppercase tracking-[0.24em] text-gray-500 mb-4">FAQ</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight">Questions, answered clearly.</h2>
+            </div>
+            <div class="space-y-5">
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+                    <h3 class="font-semibold mb-2">What is a Digital Partner?</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">A Digital Partner is a domain-specific intelligence layer configured around a real human's goals, context, and workflows. It is designed to be useful, consistent, and increasingly aligned to the operator it supports.</p>
                 </div>
-                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6">
                     <h3 class="font-semibold mb-2">Is the free tier actually free?</h3>
-                    <p class="text-gray-400 text-sm">Yes. Forever. No credit card. No trial that expires. 1 agent, 10 queries per day. We believe everyone deserves access.</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">Yes. Genesis is built to widen access, not hide core utility behind a fake trial structure.</p>
                 </div>
-                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
-                    <h3 class="font-semibold mb-2">How does "funding a free partner" work?</h3>
-                    <p class="text-gray-400 text-sm">Every paid subscription directly funds free digital partners for people who can't afford them — students, single parents, people in developing countries. Your $29/mo gives two people an intelligent partner.</p>
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+                    <h3 class="font-semibold mb-2">How does the Give Model work?</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Paid access directly funds free access for people who otherwise would not have this capability. The model is simple by design.</p>
                 </div>
-                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
-                    <h3 class="font-semibold mb-2">Can I request a partner that's not listed?</h3>
-                    <p class="text-gray-400 text-sm">Absolutely. The applications are limitless. Email us with what you need and we'll build it. Any domain, any workflow, any dream.</p>
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+                    <h3 class="font-semibold mb-2">Can Genesis support domains beyond what's listed here?</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Yes. The categories on this page are the operating structure, not the limit. If the workflow matters, Genesis can be configured around it.</p>
                 </div>
-                <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
-                    <h3 class="font-semibold mb-2">Is my data private?</h3>
-                    <p class="text-gray-400 text-sm">Your agent's memory is yours alone. We never share, sell, or train on your personal data. Period.</p>
+                <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+                    <h3 class="font-semibold mb-2">What happens to my data?</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Your memory, context, and operating data should remain private, portable, and under your control. That principle is foundational to the Genesis stack.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission -->
-    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900 text-center">
-        <div class="max-w-3xl mx-auto">
-            <p class="text-3xl md:text-4xl text-gray-200 font-light leading-relaxed mb-8">"Our goal isn't a product.<br>It's <span class="gradient-text font-semibold">a billion people</span><br>with a digital partner in their corner."</p>
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-900 text-center border-t border-gray-800">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-sm uppercase tracking-[0.24em] text-gray-500 mb-5">Mission</p>
+            <p class="text-3xl md:text-5xl text-gray-200 font-light leading-tight mb-8">A billion people with a Digital Partner in their corner.</p>
             <a href="#waitlist" class="bg-indigo-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition inline-block">Join the Mission →</a>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-12 px-4 md:px-8 lg:px-16 text-center text-gray-600 mb-16">
-        <p class="mb-2">&copy; 2026 Genesis — Your Intelligence, Your Life.</p>
+        <p class="mb-2">&copy; 2026 Genesis — Infrastructure for the New World.</p>
         <p class="text-sm">Built with purpose by <a href="https://openclaw.ai" class="underline text-gray-500 hover:text-white">OpenClaw</a> 🧞</p>
     </footer>
 
