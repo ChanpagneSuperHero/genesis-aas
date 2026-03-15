@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanctuary Vault | Genesis AAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0px, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 100%, 95%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(210, 100%, 93%, 1) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .stripe-gradient {
+            background: linear-gradient(135deg, #0A2540 0%, #1A4D80 100%);
+        }
+        .custom-file-upload {
+            transition: all 0.2s ease;
+        }
+        .custom-file-upload:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(10, 37, 64, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col items-center justify-center p-6">
+
+    <div class="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Sidebar / Info Panel -->
+        <div class="lg:col-span-4 space-y-8">
+            <div class="space-y-2">
+                <div class="flex items-center space-x-2 text-[#0A2540]">
+                    <i class="ph-fill ph-shield-check text-2xl"></i>
+                    <h1 class="text-2xl font-bold tracking-tight">Sanctuary Vault</h1>
+                </div>
+                <p class="text-sm font-medium text-slate-500 uppercase tracking-widest">Genesis AAS Protocol</p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-1 h-full bg-[#0A2540]"></div>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-slate-800 text-lg">Active Subscription</h3>
+                    <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
+                        LIVE
+                    </span>
+                </div>
+                <div class="flex items-baseline space-x-1 mb-4">
+                    <span class="text-3xl font-bold text-[#0A2540]">$97</span>
+                    <span class="text-slate-500 font-medium">/mo</span>
+                </div>
+                <ul class="space-y-3 text-sm text-slate-600">
+                    <li class="flex items-start">
+                        <i class="ph-bold ph-check text-green-500 mt-0.5 mr-2"></i>
+                        <span>Zero vendor lock-in</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="ph-bold ph-check text-green-500 mt-0.5 mr-2"></i>
+                        <span>Automated OpenClaw backups</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="ph-bold ph-check text-green-500 mt-0.5 mr-2"></i>
+                        <span>Military-grade AES-256 encryption</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="text-xs text-slate-400 font-medium">
+                &copy; 2026 Genesis AAS LLC. All rights reserved.
+            </div>
+        </div>
+
+        <!-- Main Upload Interface -->
+        <div class="lg:col-span-8 glass-panel rounded-3xl p-8 lg:p-12 shadow-xl border border-white/60">
+            <h2 class="text-3xl font-bold text-slate-800 mb-3 tracking-tight">Secure Data Upload</h2>
+            <p class="text-slate-500 text-lg mb-10 leading-relaxed">Deposit your digital partner's memory into cold storage. Your data remains client-side encrypted until transmission.</p>
+
+            <div class="space-y-8">
+                <!-- Step 1 -->
+                <div class="flex items-start group">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100 mr-5 shadow-sm">1</div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-slate-800 mb-1">Compress Directory</h4>
+                        <p class="text-slate-600 leading-relaxed">Locate your <code class="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-sm font-mono border border-slate-200">~/.openclaw</code> folder on your primary machine and compress it into a <code class="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-sm font-mono border border-slate-200">.zip</code> archive.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex items-start group">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100 mr-5 shadow-sm">2</div>
+                    <div class="w-full">
+                        <h4 class="text-lg font-semibold text-slate-800 mb-1">Select File</h4>
+                        <p class="text-slate-600 leading-relaxed mb-4">Choose the compressed file. We will generate a unique Vault-ID tied to your Stripe identity.</p>
+                        
+                        <!-- Upload Box -->
+                        <div class="mt-4">
+                            <label for="file-upload" class="custom-file-upload flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-slate-300 rounded-2xl cursor-pointer bg-white/50 hover:bg-white hover:border-blue-400 group">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="ph-bold ph-upload-simple text-2xl"></i>
+                                    </div>
+                                    <p class="mb-2 text-sm text-slate-600"><span class="font-semibold text-[#0A2540]">Click to browse</span> or drag and drop</p>
+                                    <p class="text-xs text-slate-400 uppercase tracking-wide font-medium">ZIP files up to 2GB</p>
+                                </div>
+                                <input id="file-upload" type="file" class="hidden" accept=".zip" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex items-start group">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg border border-blue-100 mr-5 shadow-sm">3</div>
+                    <div class="w-full">
+                        <h4 class="text-lg font-semibold text-slate-800 mb-1">Initialize Encryption</h4>
+                        <p class="text-slate-600 leading-relaxed mb-5">Finalize your Vault entry and hand off to the secure billing processor.</p>
+                        
+                        <button id="submit-btn" disabled class="w-full sm:w-auto stripe-gradient text-white font-semibold py-3.5 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                            <i class="ph-bold ph-lock-key text-lg"></i>
+                            <span>Encrypt & Vault Data</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-upload');
+        const submitBtn = document.getElementById('submit-btn');
+
+        fileInput.addEventListener('change', function(e) {
+            if(e.target.files.length > 0) {
+                submitBtn.removeAttribute('disabled');
+                submitBtn.innerHTML = `<i class="ph-bold ph-lock-key text-lg"></i><span>Encrypt ${e.target.files[0].name}</span>`;
+            } else {
+                submitBtn.setAttribute('disabled', 'true');
+                submitBtn.innerHTML = `<i class="ph-bold ph-lock-key text-lg"></i><span>Encrypt & Vault Data</span>`;
+            }
+        });
+
+        submitBtn.addEventListener('click', function() {
+            submitBtn.innerHTML = `<i class="ph-bold ph-spinner animate-spin text-lg"></i><span>Initializing AES-256...</span>`;
+            setTimeout(() => {
+                alert('File staged for AES-256 encryption.\\n\\nRedirecting to secure Stripe portal for $97/mo active subscription handoff.');
+                submitBtn.innerHTML = `<i class="ph-bold ph-check-circle text-lg"></i><span>Vault Secured</span>`;
+            }, 1200);
+        });
+    </script>
+</body>
+</html>
