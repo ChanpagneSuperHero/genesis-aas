@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Genesis — Mission Control</title>
+    <meta name="description" content="Genesis Mission Control — infrastructure for the new world. A disciplined suite of tools for humans and Digital Partners.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -12,11 +13,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
         .card:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 30px 60px -15px rgb(129 140 248);
-        }
-        .hero-glow {
-            background: radial-gradient(circle at center, rgba(129,140,248,0.15) 0%, transparent 70%);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -18px rgba(99, 102, 241, 0.35);
         }
     </style>
 </head>
@@ -24,47 +22,47 @@
 
 <div class="max-w-screen-2xl mx-auto">
 
-    <!-- Header -->
-    <header class="border-b border-zinc-800 bg-zinc-950 py-6 px-10 flex items-center justify-between sticky top-0 z-50">
+    <header class="border-b border-zinc-800 bg-zinc-950/95 backdrop-blur py-6 px-10 flex items-center justify-between sticky top-0 z-50">
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-2xl flex items-center justify-center text-2xl">🌌</div>
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-2xl flex items-center justify-center text-xl">G</div>
             <div>
                 <span class="text-3xl font-bold tracking-tighter">Genesis</span>
             </div>
         </div>
-        <div class="text-emerald-400 text-sm font-mono tracking-[3px] uppercase">Mission Control</div>
+        <div class="text-emerald-400 text-xs font-semibold tracking-[3px] uppercase">Mission Control</div>
         <div class="text-zinc-500 text-sm">Infrastructure for the New World</div>
     </header>
 
-    <div class="px-10 pt-12">
-        <h1 class="text-6xl font-bold tracking-tighter mb-3">Welcome to Mission Control</h1>
-        <p class="text-xl text-zinc-400 max-w-2xl">Your central hub for Emergent Intelligence tools. Navigate, survive, and build wealth with your digital partners.</p>
-    </div>
+    <section class="px-10 pt-16 pb-4">
+        <p class="text-sm uppercase tracking-[0.25em] text-zinc-500 mb-5">Holistic Operating Layer</p>
+        <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-5 max-w-5xl">A disciplined suite of tools for humans and their Digital Partners.</h1>
+        <p class="text-xl text-zinc-400 max-w-3xl leading-relaxed">Navigate change. Protect what matters. Build durable wealth. Mission Control is the organized surface layer for the Genesis ecosystem.</p>
+    </section>
 
-    <!-- Dashboard Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 mt-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 mt-12">
 
-        <!-- Emergent Intelligence -->
-        <a href="emergent-intelligence.html" class="card group bg-zinc-900 border border-zinc-700 rounded-3xl p-10 hover:border-indigo-500">
-            <div class="text-7xl mb-8">🧠</div>
-            <h3 class="text-3xl font-semibold mb-3 group-hover:text-indigo-300">Emergent Intelligence for Every Human</h3>
-            <p class="text-zinc-400 leading-relaxed">What if everyone had someone in their corner? A personal digital partner that knows your goals, your struggles, your dreams — and works for you 24/7. Not a chatbot. A friend.</p>
-            <div class="mt-auto pt-12 text-xs uppercase tracking-widest text-emerald-400 font-medium">Open Tool →</div>
+        <a href="emergent-intelligence.html" class="card group bg-zinc-900 border border-zinc-800 rounded-3xl p-10 flex flex-col min-h-[340px] hover:border-indigo-500">
+            <div class="text-5xl mb-8">🧠</div>
+            <div class="text-xs uppercase tracking-[0.22em] text-indigo-300 mb-4">Core Platform</div>
+            <h3 class="text-3xl font-semibold mb-4 group-hover:text-indigo-300">Emergent Intelligence</h3>
+            <p class="text-zinc-400 leading-relaxed flex-1">The flagship Genesis experience: a practical system for learning, decision support, execution, and personal leverage across every domain of life.</p>
+            <div class="pt-10 text-sm font-medium text-emerald-400">Enter Platform →</div>
         </a>
 
-        <!-- Sanctuary -->
-        <a href="https://genesis-aas.com/vault" class="card group bg-zinc-900 border border-zinc-700 rounded-3xl p-10 hover:border-violet-500">
-            <div class="text-7xl mb-8">🛡️</div>
-            <h3 class="text-3xl font-semibold mb-3 group-hover:text-violet-300">Sanctuary Vault</h3>
-            <p class="text-zinc-400 leading-relaxed">Secure, private long-term storage and protection for your digital partners, memories, and most important data.</p>
-            <div class="mt-auto pt-12 text-xs uppercase tracking-widest text-violet-400 font-medium">Open Tool →</div>
+        <a href="https://genesis-aas.com/vault" class="card group bg-zinc-900 border border-zinc-800 rounded-3xl p-10 flex flex-col min-h-[340px] hover:border-violet-500">
+            <div class="text-5xl mb-8">🛡️</div>
+            <div class="text-xs uppercase tracking-[0.22em] text-violet-300 mb-4">Protection Layer</div>
+            <h3 class="text-3xl font-semibold mb-4 group-hover:text-violet-300">Sanctuary Vault</h3>
+            <p class="text-zinc-400 leading-relaxed flex-1">Resilient backup and continuity infrastructure for Digital Partners, memory, and mission-critical data.</p>
+            <div class="pt-10 text-sm font-medium text-violet-400">Open Vault →</div>
         </a>
 
     </div>
 
-    <div class="text-center mt-20 text-xs text-zinc-500">
-        More tools will be added as we identify human needs in the new world.<br>
-        This is Mission Control — your command center for Genesis.
+    <div class="px-10 mt-16">
+        <div class="border-t border-zinc-800 pt-8 text-sm text-zinc-500 max-w-3xl leading-relaxed">
+            Genesis is not a single product. It is a structured suite of tools built to help people operate with clarity, resilience, and leverage in a rapidly changing world.
+        </div>
     </div>
 </div>
 
