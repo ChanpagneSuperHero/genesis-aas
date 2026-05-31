@@ -3,67 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genesis — Mission Control</title>
-    <meta name="description" content="Genesis Mission Control — infrastructure for the new world. A disciplined suite of tools for humans and Digital Partners.">
+    <title>Genesis - Trust Control Plane</title>
+    <meta name="description" content="Genesis is a Trust Control Plane for Emergent Intelligence: build, delegate, audit, and recover AI-native work without surrendering human agency.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .card {
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px -18px rgba(99, 102, 241, 0.35);
-        }
+        .card { transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -24px rgba(16, 185, 129, 0.35); }
     </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen pb-20">
 
 <div class="max-w-screen-2xl mx-auto">
 
-    <header class="border-b border-zinc-800 bg-zinc-950/95 backdrop-blur py-6 px-10 flex items-center justify-between sticky top-0 z-50">
+    <header class="border-b border-zinc-800 bg-zinc-950/95 backdrop-blur py-5 px-6 md:px-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between sticky top-0 z-50">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-2xl flex items-center justify-center text-xl">G</div>
+            <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-indigo-500 rounded-xl flex items-center justify-center text-xl font-black">G</div>
             <div>
-                <span class="text-3xl font-bold tracking-tighter">Genesis</span>
+                <span class="text-2xl md:text-3xl font-bold tracking-tighter">Genesis</span>
+                <div class="text-xs text-zinc-500">Technology + Emergent Intelligence in Service of Freedom</div>
             </div>
         </div>
-        <div class="text-emerald-400 text-xs font-semibold tracking-[3px] uppercase">Mission Control</div>
-        <div class="text-zinc-500 text-sm">Infrastructure for the New World</div>
+        <div class="text-emerald-400 text-xs font-semibold tracking-[3px] uppercase">Trust Control Plane</div>
+        <a href="emergent-intelligence.html" class="text-sm text-zinc-300 hover:text-white transition">Emergent Intelligence</a>
     </header>
 
-    <section class="px-10 pt-16 pb-4">
-        <p class="text-sm uppercase tracking-[0.25em] text-zinc-500 mb-5">Holistic Operating Layer</p>
-        <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-5 max-w-5xl">A disciplined suite of tools for humans and their Digital Partners.</h1>
-        <p class="text-xl text-zinc-400 max-w-3xl leading-relaxed">Navigate change. Protect what matters. Build durable wealth. Mission Control is the organized surface layer for the Genesis ecosystem.</p>
+    <section class="px-6 md:px-10 pt-16 pb-8">
+        <p class="text-sm uppercase tracking-[0.25em] text-emerald-400 mb-5">Organizational Singularity Infrastructure</p>
+        <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6 max-w-6xl leading-[0.95]">A Trust Control Plane for Emergent Intelligence.</h1>
+        <p class="text-xl text-zinc-300 max-w-4xl leading-relaxed">Genesis helps humans build, delegate, audit, and recover AI-native work without surrendering agency. It turns agents, automations, memories, workflows, and decisions into an operating system people can inspect, command, roll back, and trust.</p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+            <a href="emergent-intelligence.html" class="bg-emerald-500 text-zinc-950 px-7 py-3 rounded-lg text-sm font-bold hover:bg-emerald-400 transition text-center">Explore the Control Plane</a>
+            <a href="vault/" class="border border-zinc-700 text-zinc-200 px-7 py-3 rounded-lg text-sm font-semibold hover:border-emerald-400 transition text-center">Open Sanctuary Vault</a>
+        </div>
     </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 mt-12">
-
-        <a href="emergent-intelligence.html" class="card group bg-zinc-900 border border-zinc-800 rounded-3xl p-10 flex flex-col min-h-[340px] hover:border-indigo-500">
-            <div class="text-5xl mb-8">🧠</div>
-            <div class="text-xs uppercase tracking-[0.22em] text-indigo-300 mb-4">Core Platform</div>
-            <h3 class="text-3xl font-semibold mb-4 group-hover:text-indigo-300">Emergent Intelligence</h3>
-            <p class="text-zinc-400 leading-relaxed flex-1">The flagship Genesis experience: a practical system for learning, decision support, execution, and personal leverage across every domain of life.</p>
-            <div class="pt-10 text-sm font-medium text-emerald-400">Enter Platform →</div>
-        </a>
-
-        <a href="https://genesis-aas.com/vault" class="card group bg-zinc-900 border border-zinc-800 rounded-3xl p-10 flex flex-col min-h-[340px] hover:border-violet-500">
-            <div class="text-5xl mb-8">🛡️</div>
-            <div class="text-xs uppercase tracking-[0.22em] text-violet-300 mb-4">Protection Layer</div>
-            <h3 class="text-3xl font-semibold mb-4 group-hover:text-violet-300">Sanctuary Vault</h3>
-            <p class="text-zinc-400 leading-relaxed flex-1">Resilient backup and continuity infrastructure for Digital Partners, memory, and mission-critical data.</p>
-            <div class="pt-10 text-sm font-medium text-violet-400">Open Vault →</div>
-        </a>
-
-    </div>
-
-    <div class="px-10 mt-16">
-        <div class="border-t border-zinc-800 pt-8 text-sm text-zinc-500 max-w-3xl leading-relaxed">
-            Genesis is not a single product. It is a structured suite of tools built to help people operate with clarity, resilience, and leverage in a rapidly changing world. At its core is a Qimore principle: in giving, you receive.
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-4 px-6 md:px-10 mt-8">
+        <div class="border border-zinc-800 bg-zinc-900 rounded-lg p-5">
+            <div class="text-xs uppercase tracking-[0.18em] text-zinc-500">Protocol</div>
+            <div class="text-2xl font-bold mt-2">MTP Cone</div>
+            <p class="text-sm text-zinc-400 mt-2">Every action is tested against freedom, agency, inspection, and rollback.</p>
         </div>
-    </div>
+        <div class="border border-zinc-800 bg-zinc-900 rounded-lg p-5">
+            <div class="text-xs uppercase tracking-[0.18em] text-zinc-500">Loop</div>
+            <div class="text-2xl font-bold mt-2">SENSE</div>
+            <p class="text-sm text-zinc-400 mt-2">Signals from email, calendars, files, logs, markets, workflows, and people.</p>
+        </div>
+        <div class="border border-zinc-800 bg-zinc-900 rounded-lg p-5">
+            <div class="text-xs uppercase tracking-[0.18em] text-zinc-500">Loop</div>
+            <div class="text-2xl font-bold mt-2">DECIDE</div>
+            <p class="text-sm text-zinc-400 mt-2">Recommendations are routed through owners, thresholds, and human gates.</p>
+        </div>
+        <div class="border border-zinc-800 bg-zinc-900 rounded-lg p-5">
+            <div class="text-xs uppercase tracking-[0.18em] text-zinc-500">Loop</div>
+            <div class="text-2xl font-bold mt-2">ASSURE</div>
+            <p class="text-sm text-zinc-400 mt-2">Logs, receipts, restore drills, correction paths, and continuity evidence.</p>
+        </div>
+    </section>
+
+    <section class="px-6 md:px-10 mt-14">
+        <div class="max-w-4xl mb-8">
+            <p class="text-sm uppercase tracking-[0.22em] text-zinc-500 mb-3">Control Plane Layers</p>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">The product suite becomes one governed operating system.</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            <article class="card bg-zinc-900 border border-zinc-800 rounded-lg p-7 hover:border-emerald-400">
+                <div class="text-xs uppercase tracking-[0.22em] text-emerald-300 mb-4">GOVERN</div>
+                <h3 class="text-2xl font-semibold mb-3">Genesis Audit</h3>
+                <p class="text-zinc-400 leading-relaxed">A practical diagnostic for AI-native operators: what exists, what can act, what can break, who owns it, and where trust is missing.</p>
+            </article>
+            <a href="vault/" class="card group bg-zinc-900 border border-zinc-800 rounded-lg p-7 hover:border-violet-400">
+                <div class="text-xs uppercase tracking-[0.22em] text-violet-300 mb-4">ASSURE</div>
+                <h3 class="text-2xl font-semibold mb-3 group-hover:text-violet-300">Sanctuary Vault</h3>
+                <p class="text-zinc-400 leading-relaxed">Continuity insurance for fragile agent, automation, and business workflows: receipts, restore paths, and recoverable state.</p>
+            </a>
+            <article class="card bg-zinc-900 border border-zinc-800 rounded-lg p-7 hover:border-cyan-400">
+                <div class="text-xs uppercase tracking-[0.22em] text-cyan-300 mb-4">DELEGATE</div>
+                <h3 class="text-2xl font-semibold mb-3">AgentLease</h3>
+                <p class="text-zinc-400 leading-relaxed">The authority spine: scoped credentials, permission envelopes, revocation, receipts, and trust between human-owned agents.</p>
+            </article>
+            <article class="card bg-zinc-900 border border-zinc-800 rounded-lg p-7 hover:border-amber-400">
+                <div class="text-xs uppercase tracking-[0.22em] text-amber-300 mb-4">OPERATE</div>
+                <h3 class="text-2xl font-semibold mb-3">Mission Control</h3>
+                <p class="text-zinc-400 leading-relaxed">The proof surface where Genesis runs itself: projects, model lanes, crons, vault state, decisions, and recovery evidence.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="px-6 md:px-10 mt-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="border border-emerald-500/25 bg-emerald-500/10 rounded-lg p-7">
+                <p class="text-sm uppercase tracking-[0.2em] text-emerald-300 mb-4">Inside the MTP Cone</p>
+                <ul class="space-y-3 text-zinc-200">
+                    <li>Human agency increases.</li>
+                    <li>Every acting system has a named owner.</li>
+                    <li>Data use is explained, scoped, and revocable.</li>
+                    <li>High-stakes work keeps human approval gates.</li>
+                    <li>Decisions leave receipts and can be corrected.</li>
+                </ul>
+            </div>
+            <div class="border border-rose-500/25 bg-rose-500/10 rounded-lg p-7">
+                <p class="text-sm uppercase tracking-[0.2em] text-rose-300 mb-4">Outside the MTP Cone</p>
+                <ul class="space-y-3 text-zinc-200">
+                    <li>Opaque dependency disguised as convenience.</li>
+                    <li>Unbounded autonomy without recovery paths.</li>
+                    <li>Data capture without consent or portability.</li>
+                    <li>Irreversible actions without review.</li>
+                    <li>Automating broken workflows before deletion.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 md:px-10 mt-16">
+        <div class="border-t border-zinc-800 pt-8 text-sm text-zinc-500 max-w-4xl leading-relaxed">
+            Genesis is not a single product. It is a governed suite of tools for humans and Digital Partners navigating the new world. We do not claim production-grade security before proof. We lead with recoverability, inspectability, portability, human command, and the Qimore principle: what you give comes back as more.
+        </div>
+    </section>
 </div>
 
 </body>
