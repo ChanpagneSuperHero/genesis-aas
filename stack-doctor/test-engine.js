@@ -18,7 +18,13 @@ const volume = evaluate({role:"operator",tools:3,activeTools:3,spend:90,apiSpend
 assert.ok(volume.decisions.some(x => x.type === "route"));
 assert.ok(volume.decisions.some(x => x.type === "downgrade"));
 
+const inventoried = evaluate({role:"consultant",tools:99,activeTools:99,spend:999,apiSpend:0,repeatHours:5,overlap:"yes",primary:"yes",renewals:"yes",privacyReview:"yes",exports:"yes",automation:"yes",humanReview:"yes",quality:4,costSensitivity:4,privacyPriority:3,failureTolerance:3,contextSize:"medium",outputSize:"medium",reasoningDepth:"skilled",runsPerMonth:30,budgetCap:100,sensitive:[],taskTypes:["research"],capabilities:[],inventory:[{provider:"Anthropic",name:"Claude",access:"subscription",plan:"Pro",cost:20,usage:"unused",purpose:"Writing"},{provider:"OpenAI",name:"GPT",access:"api",plan:"PAYG",cost:8,usage:"weekly",purpose:"Research"}]});
+assert.equal(inventoried.inventorySummary.length, 2);
+assert.equal(inventoried.monthlySavings, 20);
+assert.ok(inventoried.decisions.some(x => x.type === "cancel" && /Claude/.test(x.title)));
+
 const zero = evaluate({role:"creator",tools:0,activeTools:0,spend:0,apiSpend:0,repeatHours:0,overlap:"no",primary:"no",renewals:"no",privacyReview:"yes",exports:"yes",automation:"no",humanReview:"yes",sensitive:[]});
 assert.equal(Number.isFinite(zero.score), true);
 assert.equal(zero.annualSavings, 0);
+assert.deepEqual(zero.inventorySummary, []);
 console.log("PASS: AI Stack Doctor scoring engine");

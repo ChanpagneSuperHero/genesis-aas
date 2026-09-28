@@ -74,6 +74,12 @@
           </div>
           <div class="choice-row"><span>Do multiple tools perform the same job?</span><label><input type="radio" name="overlap" value="yes" required> Yes</label><label><input type="radio" name="overlap" value="no"> No</label></div>
           <div class="choice-row"><span>Do you have one primary assistant?</span><label><input type="radio" name="primary" value="yes" required> Yes</label><label><input type="radio" name="primary" value="no"> No</label></div>
+          <section class="inventory-builder">
+            <div class="inventory-head"><div><h3>Model and tool inventory</h3><p class="helper">Optional, but it produces model-specific recommendations. Do not enter passwords, API keys, tokens, or account numbers.</p></div><button type="button" class="button ghost" id="add-inventory">Add a model or tool</button></div>
+            <div id="inventory-rows"></div>
+            <div class="inventory-actions"><label class="button ghost file-button">Import local JSON<input id="inventory-import" type="file" accept="application/json,.json"></label><button type="button" class="button ghost" id="inventory-export">Export inventory JSON</button></div>
+            <p class="helper">Import and analysis happen only in this browser. This version never connects to provider accounts.</p>
+          </section>
         </fieldset>
 
         <fieldset class="step" data-step="3">
@@ -151,6 +157,7 @@
       <div class="metric-grid" id="metric-grid"></div>
       <div class="savings-card"><div><span>Estimated avoidable spend</span><strong id="savings">$0/year</strong></div><p>Directional estimate based on inactive tools, overlap, and renewal controls—not a guarantee.</p></div>
       <article class="panel workload-summary"><h3>Your workload profile</h3><div id="workload-summary"></div></article>
+      <article class="panel inventory-summary"><h3>Your declared model footprint</h3><div id="inventory-summary"></div></article>
       <div class="decision-grid" id="decision-grid"></div>
       <div class="result-grid">
         <article class="panel"><h3>Your next five moves</h3><ol id="actions"></ol></article>

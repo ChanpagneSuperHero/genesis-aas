@@ -18,9 +18,11 @@
   const sizeLabels = { small:"small context", medium:"medium context", large:"large context", maximum:"maximum context" };
 
   function evaluate(input) {
-    const tools = number(input.tools);
-    const activeTools = Math.min(tools, number(input.activeTools));
-    const spend = number(input.spend);
+    const inventory = list(input.inventory).filter(item => item && (item.name || item.provider));
+    const declaredInventorySpend = inventory.reduce((sum, item) => sum + number(item.cost), 0);
+    const tools = inventory.length || number(input.tools);
+    const activeTools = inventory.length ? inventory.filter(item => item.usage !== "unused").length : Math.min(tools, number(input.activeTools));
+    const spend = inventory.length ? declaredInventorySpend : number(input.spend);
     const apiSpend = number(input.apiSpend);
     const repeatHours = number(input.repeatHours);
     const runs = number(input.runsPerMonth, 40);
@@ -49,7 +51,13 @@
     const tierMismatch = !frontier && !heavyContext && quality <= 3 ? 0.08 + costSensitivity * 0.025 : 0;
     const budgetPressure = budgetCap > 0 && spend + apiSpend > budgetCap ? 0.08 : 0;
     const estimatedWasteRatio = Math.min(0.65, unusedRatio * 0.7 + (overlap ? 0.18 : 0) + (!renewals ? 0.05 : 0) + tierMismatch + budgetPressure);
-    const monthlySavings = Math.round(spend * estimatedWasteRatio);
+    const exactInventoryWaste = inventory.reduce((sum, item) => {
+      const cost = number(item.cost);
+      if (item.usage === "unused") return sum + cost;
+      if (["rare","monthly"].includes(item.usage) && item.access === "subscription") return sum + cost * 0.5;
+      return sum;
+    }, 0);
+    const monthlySavings = Math.round(inventory.length ? Math.min(spend, Math.max(exactInventoryWaste, spend * Math.min(estimatedWasteRatio, 0.35))) : spend * estimatedWasteRatio);
     const focus = clamp(100 - tools * 5 - unused * 12 - (overlap ? 14 : 0) + (primary ? 14 : 0));
     const cost = clamp(100 - estimatedWasteRatio * 100 - (spend + apiSpend > budgetCap && budgetCap > 0 ? 14 : 0) + (renewals ? 10 : 0));
     const privacy = clamp(82 - sensitive.length * 7 + (privacyReview ? 16 : -18) + (exports ? 8 : -8) + (localRequired ? 6 : 0));
@@ -62,6 +70,13 @@
     else if (score >= 50) band = "Useful but fragmented";
 
     const decisions = [];
+    inventory.forEach((item) => {
+      const label = [item.provider, item.name].filter(Boolean).join(" ");
+      if (item.usage === "unused" && number(item.cost) > 0) decisions.push({ type:"cancel", title:label, reason:`No use in 30 days; cancel or pause the ${item.plan || "current"} plan before its next renewal.`, confidence:"high", assumption:"the reported usage is complete" });
+      else if (["rare","monthly"].includes(item.usage) && item.access === "subscription" && number(item.cost) > 0) decisions.push({ type:"api", title:label, reason:"Usage is intermittent; compare pay-as-you-go cost with the recurring plan.", confidence:"medium", assumption:"this provider offers equivalent metered access" });
+      else if (item.access === "local") decisions.push({ type:"keep", title:label, reason:"Local access supports privacy and resilience without another recurring model fee.", confidence:"medium", assumption:"quality and hardware performance remain adequate" });
+      else if (item.access === "oauth") decisions.push({ type:"keep", title:label, reason:"Bundled OAuth access can be economical, but verify permissions, account ownership, and portability.", confidence:"medium", assumption:"the access is included in an existing plan" });
+    });
     if (unused > 0) decisions.push({ type:"cancel", title:`${unused} inactive tool${unused === 1 ? "" : "s"}`, reason:"No use in the last 30 days means these subscriptions need explicit proof before renewal.", confidence:"high", assumption:"last-30-day use predicts near-term value" });
     if (overlap) decisions.push({ type:"consolidate", title:"Overlapping general assistants", reason:"Choose one primary assistant and retain specialists only for a named workflow they win.", confidence:"high", assumption:"the overlapping tools perform substantially similar jobs" });
     if (localRequired) decisions.push({ type:"local", title:"Private or sensitive workflows", reason:"Route the most sensitive work to a capable local model or a provider with verified no-retention controls.", confidence:"medium", assumption:"local hardware can meet the minimum quality requirement" });
@@ -87,6 +102,10 @@
       `quality ${quality}/5 · cost sensitivity ${costSensitivity}/5 · speed ${speedPriority}/5 · privacy ${privacyPriority}/5`,
       budgetCap ? `$${budgetCap}/month hard ceiling` : "No hard monthly ceiling"
     ];
+    const inventorySummary = inventory.map((item) => ({
+      name:[item.provider, item.name].filter(Boolean).join(" ") || "Unnamed item",
+      detail:`${item.access || "subscription"} · ${item.plan || "plan not stated"} · $${number(item.cost).toFixed(2)}/month · ${item.usage || "usage not stated"}${item.purpose ? ` · ${item.purpose}` : ""}`
+    }));
     const stack = [
       { label:"Primary assistant", advice:primary ? "Keep it for everyday work and define what it owns." : "Pick one assistant for daily thinking, writing, and synthesis." },
       { label:"Premium lane", advice:frontier || heavyContext ? "Reserve one premium model for demanding work; do not use it by default." : "Add premium access only when a real workflow fails the standard tier." },
@@ -105,7 +124,7 @@
       score, band, dimensions:{ focus, cost, privacy, leverage, fit },
       monthlySavings, annualSavings:monthlySavings * 12,
       actions:actions.slice(0, 6), stack, workflows, warnings,
-      decisions:decisions.slice(0, 6), workloadSummary,
+      decisions:decisions.slice(0, 10), workloadSummary, inventorySummary,
       summary:`Your stack scores ${score}/100. ${monthlySavings > 0 ? `About $${monthlySavings}/month appears avoidable. ` : ""}The goal is a blended stack: economical defaults with premium, local, or API capacity only where the workload requires it.`
     };
   }
