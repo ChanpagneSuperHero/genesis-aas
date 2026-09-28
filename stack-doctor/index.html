@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071711">
-  <meta name="description" content="In five minutes, know which AI tools to keep, what to cancel, what to automate, and where your data is exposed.">
-  <meta property="og:title" content="AI Stack Doctor — Stop paying for AI chaos">
-  <meta property="og:description" content="A private, five-minute diagnostic for your AI tools, costs, workflows, and data boundaries.">
+  <meta name="description" content="Rocket Money for your AI stack: find what to keep, cancel, downgrade, move to API, or run locally.">
+  <meta property="og:title" content="AI Stack Doctor — Find and cut AI subscription waste">
+  <meta property="og:description" content="A private, workload-aware optimizer for AI subscriptions, models, costs, and data boundaries.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://genesis-aas.com/stack-doctor/">
   <meta name="twitter:card" content="summary">
@@ -24,24 +24,24 @@
 
   <main>
     <section class="hero" id="hero">
-      <div class="eyebrow">AI STACK DOCTOR · 5-MINUTE DIAGNOSTIC</div>
-      <h1>Stop paying for AI chaos.</h1>
-      <p class="hero-copy">Know which tools to keep, what to cancel, what to automate, and where your data is exposed.</p>
+      <div class="eyebrow">AI STACK DOCTOR · YOUR AI SUBSCRIPTION OPTIMIZER</div>
+      <h1>Stop overpaying for AI.</h1>
+      <p class="hero-copy">Find what to keep, cancel, downgrade, move to API, or run locally—based on the work you actually do.</p>
       <div class="hero-actions">
         <button class="button primary" id="start-button">Diagnose my stack</button>
         <span>No login. No bank connection. No prompts uploaded.</span>
       </div>
       <div class="proof-grid" aria-label="What you receive">
-        <article><strong>Health score</strong><span>Focus, cost, leverage, privacy</span></article>
-        <article><strong>Savings estimate</strong><span>Find overlap and inactive tools</span></article>
-        <article><strong>Action plan</strong><span>Three workflows and five next steps</span></article>
+        <article><strong>Workload fit</strong><span>Match quality and tokens to real tasks</span></article>
+        <article><strong>Savings estimate</strong><span>Find overlap, idle plans, and wrong tiers</span></article>
+        <article><strong>Action plan</strong><span>Keep, cancel, downgrade, API, or local</span></article>
       </div>
     </section>
 
     <section class="assessment hidden" id="assessment">
       <div class="assessment-head">
         <div><div class="eyebrow">YOUR DIAGNOSTIC</div><h2>Tell us how your AI stack works today.</h2></div>
-        <div class="progress-wrap"><span id="progress-label">Step 1 of 4</span><div class="progress"><i id="progress-bar"></i></div></div>
+        <div class="progress-wrap"><span id="progress-label">Step 1 of 5</span><div class="progress"><i id="progress-bar"></i></div></div>
       </div>
 
       <form id="doctor-form">
@@ -68,13 +68,55 @@
             <label class="field">Paid AI tools<input name="tools" type="number" min="0" max="50" value="4" required></label>
             <label class="field">Used in the last 30 days<input name="activeTools" type="number" min="0" max="50" value="2" required></label>
             <label class="field">Monthly AI spend ($)<input name="spend" type="number" min="0" max="10000" value="80" required></label>
+            <label class="field">Monthly API spend ($)<input name="apiSpend" type="number" min="0" max="10000" value="0" required></label>
             <label class="field">Repeat-work hours per week<input name="repeatHours" type="number" min="0" max="80" value="5" required></label>
+            <label class="field">Projects or workflows supported<input name="projectCount" type="number" min="1" max="100" value="2" required></label>
           </div>
           <div class="choice-row"><span>Do multiple tools perform the same job?</span><label><input type="radio" name="overlap" value="yes" required> Yes</label><label><input type="radio" name="overlap" value="no"> No</label></div>
           <div class="choice-row"><span>Do you have one primary assistant?</span><label><input type="radio" name="primary" value="yes" required> Yes</label><label><input type="radio" name="primary" value="no"> No</label></div>
         </fieldset>
 
         <fieldset class="step" data-step="3">
+          <legend>What must your AI stack handle?</legend>
+          <p class="helper">Choose every workload that materially affects which plans you need.</p>
+          <div class="check-grid workload-types">
+            <label><input type="checkbox" name="taskTypes" value="writing"> Writing & documents</label>
+            <label><input type="checkbox" name="taskTypes" value="coding"> Coding & technical work</label>
+            <label><input type="checkbox" name="taskTypes" value="research"> Research & synthesis</label>
+            <label><input type="checkbox" name="taskTypes" value="analysis"> Strategy & analysis</label>
+            <label><input type="checkbox" name="taskTypes" value="media"> Image, audio, or video</label>
+            <label><input type="checkbox" name="taskTypes" value="automation"> Agents & automation</label>
+          </div>
+          <label class="field">Name the most important workflow<input name="workflowName" maxlength="100" placeholder="Example: weekly client research report"></label>
+          <div class="slider-grid">
+            <label class="range-field"><span>Required quality <output data-for="quality">3</output></span><input name="quality" type="range" min="1" max="5" value="3"><small>Good enough → best available</small></label>
+            <label class="range-field"><span>Cost sensitivity <output data-for="costSensitivity">3</output></span><input name="costSensitivity" type="range" min="1" max="5" value="3"><small>Cost secondary → minimize spend</small></label>
+            <label class="range-field"><span>Speed priority <output data-for="speedPriority">3</output></span><input name="speedPriority" type="range" min="1" max="5" value="3"><small>Can wait → rapid iteration</small></label>
+            <label class="range-field"><span>Privacy requirement <output data-for="privacyPriority">3</output></span><input name="privacyPriority" type="range" min="1" max="5" value="3"><small>Public work → highly sensitive</small></label>
+            <label class="range-field"><span>Failure consequence <output data-for="failureTolerance">3</output></span><input name="failureTolerance" type="range" min="1" max="5" value="3"><small>Easy to fix → costly or critical</small></label>
+          </div>
+          <details class="advanced">
+            <summary>Advanced workload controls</summary>
+            <div class="two-col">
+              <label class="field">Context required<select name="contextSize"><option value="small">Small — prompts and short files</option><option value="medium" selected>Medium — several documents</option><option value="large">Large — repositories or long research</option><option value="maximum">Maximum available context</option></select></label>
+              <label class="field">Typical output<select name="outputSize"><option value="short">Short answers</option><option value="medium" selected>Documents or moderate code</option><option value="large">Long reports or large code changes</option></select></label>
+              <label class="field">Reasoning depth<select name="reasoningDepth"><option value="routine">Routine transformation</option><option value="skilled" selected>Skilled professional work</option><option value="frontier">Difficult judgment / frontier work</option></select></label>
+              <label class="field">Runs per month<input name="runsPerMonth" type="number" min="1" max="100000" value="40"></label>
+              <label class="field">Maximum wait<select name="maxLatency"><option value="seconds">Seconds</option><option value="minutes" selected>Several minutes</option><option value="hours">Hours is acceptable</option></select></label>
+              <label class="field">Hard monthly ceiling ($)<input name="budgetCap" type="number" min="0" max="100000" value="100"></label>
+            </div>
+            <div class="check-grid">
+              <label><input type="checkbox" name="capabilities" value="web"> Current web information</label>
+              <label><input type="checkbox" name="capabilities" value="multimodal"> Images, audio, or video</label>
+              <label><input type="checkbox" name="capabilities" value="tools"> Tools and external actions</label>
+              <label><input type="checkbox" name="capabilities" value="local"> Must run locally</label>
+              <label><input type="checkbox" name="capabilities" value="fallback"> Provider fallback required</label>
+              <label><input type="checkbox" name="capabilities" value="portable"> Avoid vendor lock-in</label>
+            </div>
+          </details>
+        </fieldset>
+
+        <fieldset class="step" data-step="4">
           <legend>What information crosses the boundary?</legend>
           <p class="helper">Select categories only—do not enter actual private information.</p>
           <div class="check-grid">
@@ -88,10 +130,11 @@
           <div class="choice-row"><span>Can you export critical work and context?</span><label><input type="radio" name="exports" value="yes" required> Yes</label><label><input type="radio" name="exports" value="no"> No</label></div>
         </fieldset>
 
-        <fieldset class="step" data-step="4">
+        <fieldset class="step" data-step="5">
           <legend>Can you measure and control it?</legend>
           <div class="choice-row"><span>Do you track renewal dates and last use?</span><label><input type="radio" name="renewals" value="yes" required> Yes</label><label><input type="radio" name="renewals" value="no"> No</label></div>
           <div class="choice-row"><span>Have you automated at least one recurring workflow?</span><label><input type="radio" name="automation" value="yes" required> Yes</label><label><input type="radio" name="automation" value="no"> No</label></div>
+          <div class="choice-row"><span>Do high-consequence outputs receive human review?</span><label><input type="radio" name="humanReview" value="yes" required> Yes</label><label><input type="radio" name="humanReview" value="no"> No</label></div>
           <label class="consent"><input type="checkbox" required> I understand this is an educational diagnostic, not legal, financial, security, or compliance advice.</label>
         </fieldset>
 
@@ -107,6 +150,8 @@
       </div>
       <div class="metric-grid" id="metric-grid"></div>
       <div class="savings-card"><div><span>Estimated avoidable spend</span><strong id="savings">$0/year</strong></div><p>Directional estimate based on inactive tools, overlap, and renewal controls—not a guarantee.</p></div>
+      <article class="panel workload-summary"><h3>Your workload profile</h3><div id="workload-summary"></div></article>
+      <div class="decision-grid" id="decision-grid"></div>
       <div class="result-grid">
         <article class="panel"><h3>Your next five moves</h3><ol id="actions"></ol></article>
         <article class="panel"><h3>Your minimum viable stack</h3><div id="stack"></div></article>
