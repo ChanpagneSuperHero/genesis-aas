@@ -51,7 +51,14 @@
     const picks = [];
     const add = (role, model, why) => {
       if (!model || picks.some(item => item.id === model.id)) return;
-      picks.push({...model,role,why,confidence:model.score >= 65 ? "high" : model.score >= 45 ? "medium" : "low"});
+      const taskCoverage = tasks.filter(task=>model.tasks.includes(task)).length / tasks.length;
+      const contextCoverage = contextRank[model.context] >= requiredContext ? 1 : .35;
+      const modalityCoverage = !requiresMedia ? 1 : model.modalities.length > 2 ? 1 : model.modalities.includes("image") ? .55 : 0;
+      const workFit = clamp(model.score);
+      const coverage = clamp(taskCoverage * 70 + contextCoverage * 20 + modalityCoverage * 10);
+      const costPenalty = model.cost === null ? 18 : Math.log10(model.cost + 1) * 18;
+      const value = clamp(workFit - costPenalty + number(input.costSensitivity,3) * 5);
+      picks.push({...model,role,why,workFit,value,coverage,estimatedMonthlyCost:model.cost,confidence:model.score >= 65 ? "high" : model.score >= 45 ? "medium" : "low"});
     };
     add("Best fit",scored[0],"Highest fit across your tasks, quality, context, speed, privacy, and cost priorities.");
     const economy = scored.filter(x=>["economy","local"].includes(x.tier)).sort((a,b)=>(a.cost??999999)-(b.cost??999999) || b.score-a.score)[0];
@@ -153,6 +160,17 @@
       detail:`${item.access || "subscription"} · ${item.plan || "plan not stated"} · $${number(item.cost).toFixed(2)}/month · ${item.usage || "usage not stated"}${item.purpose ? ` · ${item.purpose}` : ""}`
     }));
     const modelRecommendations = recommendModels(input);
+    const best = modelRecommendations[0];
+    const economy = modelRecommendations.find(x=>/Lower-cost/.test(x.role));
+    const privateOption = modelRecommendations.find(x=>x.tier==="local");
+    const keptInventory = inventory.find(x=>x.usage==="daily" || x.usage==="weekly");
+    const cancelled = decisions.filter(x=>x.type==="cancel");
+    const prescription = {
+      keep:keptInventory ? `${keptInventory.provider} ${keptInventory.name}` : "No existing plan has earned a keep decision yet",
+      add:best ? `${best.provider} ${best.name} only if your current stack cannot cover its assigned work` : "No addition recommended",
+      cancel:cancelled.length ? cancelled.map(x=>x.title).join(", ") : "No immediate cancellation identified",
+      route:[economy ? `${economy.name} for routine or high-volume work` : null,best ? `${best.name} for best-fit work` : null,privateOption ? `${privateOption.name} for sensitive work` : null].filter(Boolean).join("; ")
+    };
     const stack = [
       { label:"Primary assistant", advice:primary ? "Keep it for everyday work and define what it owns." : "Pick one assistant for daily thinking, writing, and synthesis." },
       { label:"Premium lane", advice:frontier || heavyContext ? "Reserve one premium model for demanding work; do not use it by default." : "Add premium access only when a real workflow fails the standard tier." },
@@ -172,7 +190,7 @@
       monthlySavings, annualSavings:monthlySavings * 12,
       actions:actions.slice(0, 6), stack, workflows, warnings,
       decisions:decisions.slice(0, 10), workloadSummary, inventorySummary,
-      modelRecommendations, catalogAsOf:catalog.asOf,
+      modelRecommendations, prescription, catalogAsOf:catalog.asOf,
       summary:`Your stack scores ${score}/100. ${monthlySavings > 0 ? `About $${monthlySavings}/month appears avoidable. ` : ""}The goal is a blended stack: economical defaults with premium, local, or API capacity only where the workload requires it.`
     };
   }

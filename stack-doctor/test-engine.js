@@ -9,6 +9,8 @@ assert.ok(healthy.score >= 75);
 assert.ok(healthy.monthlySavings <= 5);
 assert.ok(healthy.modelRecommendations.length >= 3);
 assert.ok(healthy.modelRecommendations.every(x => /^https:\/\//.test(x.link) && /^https:\/\//.test(x.source)));
+assert.ok(healthy.modelRecommendations.every(x => [x.workFit,x.value,x.coverage].every(score=>score>=0&&score<=100)));
+assert.deepEqual(Object.keys(healthy.prescription),["keep","add","cancel","route"]);
 assert.equal(healthy.catalogAsOf, "2026-09-28");
 
 const fragmented = evaluate({role:"team",tools:10,activeTools:3,spend:300,apiSpend:25,repeatHours:10,overlap:"yes",primary:"no",renewals:"no",privacyReview:"no",exports:"no",automation:"no",humanReview:"no",quality:3,costSensitivity:5,privacyPriority:5,failureTolerance:5,contextSize:"large",reasoningDepth:"frontier",runsPerMonth:12,budgetCap:150,sensitive:["customer","financial","credentials"],taskTypes:["research","automation"],capabilities:["local","tools"]});
@@ -20,6 +22,7 @@ assert.ok(fragmented.decisions.some(x => x.type === "local"));
 assert.ok(fragmented.decisions.some(x => x.type === "api"));
 assert.ok(fragmented.workloadSummary.some(x => /frontier/i.test(x)));
 assert.ok(fragmented.modelRecommendations.some(x => x.tier === "local"));
+assert.ok(/sensitive/i.test(fragmented.prescription.route));
 
 const volume = evaluate({role:"operator",tools:3,activeTools:3,spend:90,apiSpend:20,repeatHours:12,overlap:"no",primary:"yes",renewals:"yes",privacyReview:"yes",exports:"yes",automation:"yes",humanReview:"yes",quality:2,costSensitivity:5,privacyPriority:2,failureTolerance:2,contextSize:"small",outputSize:"short",reasoningDepth:"routine",runsPerMonth:1000,budgetCap:120,sensitive:[],taskTypes:["automation"],capabilities:[]});
 assert.ok(volume.decisions.some(x => x.type === "route"));
