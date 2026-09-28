@@ -16,6 +16,52 @@
   };
   const taskLabels = { writing:"Writing", coding:"Coding", research:"Research", analysis:"Strategy", media:"Media", automation:"Automation" };
   const sizeLabels = { small:"small context", medium:"medium context", large:"large context", maximum:"maximum context" };
+  const catalog = typeof module === "object" && module.exports ? require("./catalog.js") : (globalThis.StackDoctorCatalog || {asOf:"unknown",models:[]});
+  const contextRank = {small:1,medium:2,large:3,maximum:4};
+
+  function estimatedApiCost(model, input) {
+    if (model.input === null || model.output === null) return null;
+    if (model.tier === "local") return 0;
+    const inputTokens = {small:4000,medium:25000,large:150000,maximum:500000}[input.contextSize] || 25000;
+    const outputTokens = {short:1000,medium:5000,large:20000}[input.outputSize] || 5000;
+    const reasoningMultiplier = input.reasoningDepth === "frontier" ? 1.5 : input.reasoningDepth === "routine" ? .75 : 1;
+    return ((inputTokens * model.input + outputTokens * model.output * reasoningMultiplier) / 1000000) * number(input.runsPerMonth,40);
+  }
+
+  function recommendModels(input) {
+    const tasks = list(input.taskTypes).length ? list(input.taskTypes) : ["writing"];
+    const requiredContext = contextRank[input.contextSize] || 2;
+    const quality = number(input.quality,3);
+    const speed = number(input.speedPriority,3);
+    const privacy = number(input.privacyPriority,3);
+    const requiresMedia = tasks.includes("media") || list(input.capabilities).includes("multimodal");
+    const localRequired = list(input.capabilities).includes("local") || privacy >= 5;
+    const scored = catalog.models.map(model => {
+      let score = tasks.filter(task => model.tasks.includes(task)).length * 8;
+      score += model.quality * quality + model.speed * speed;
+      score += contextRank[model.context] >= requiredContext ? 12 : -25;
+      if (requiresMedia) score += model.modalities.length > 2 ? 14 : model.modalities.includes("image") ? 5 : -25;
+      if (localRequired) score += model.tier === "local" ? 35 : -8;
+      else if (privacy >= 4 && model.tier === "local") score += 12;
+      if (number(input.costSensitivity,3) >= 4) score += model.tier === "economy" || model.tier === "local" ? 15 : model.tier === "frontier" ? -8 : 4;
+      if (input.reasoningDepth === "frontier") score += model.tier === "frontier" ? 22 : model.tier === "economy" || model.tier === "local" ? -15 : 5;
+      if (number(input.runsPerMonth,40) >= 250) score += model.tier === "economy" ? 20 : model.tier === "frontier" ? -10 : 5;
+      return {...model,score,cost:estimatedApiCost(model,input)};
+    }).sort((a,b)=>b.score-a.score);
+    const picks = [];
+    const add = (role, model, why) => {
+      if (!model || picks.some(item => item.id === model.id)) return;
+      picks.push({...model,role,why,confidence:model.score >= 65 ? "high" : model.score >= 45 ? "medium" : "low"});
+    };
+    add("Best fit",scored[0],"Highest fit across your tasks, quality, context, speed, privacy, and cost priorities.");
+    const economy = scored.filter(x=>["economy","local"].includes(x.tier)).sort((a,b)=>(a.cost??999999)-(b.cost??999999) || b.score-a.score)[0];
+    add("Lower-cost option",economy,"Use for bounded or high-volume work, escalating exceptions to the best-fit model.");
+    const premium = scored.filter(x=>x.tier==="frontier").sort((a,b)=>b.score-a.score)[0];
+    add("Premium escalation",premium,"Reserve for difficult judgment, maximum-context work, or costly failure modes.");
+    if (privacy >= 4 || localRequired) add("Private/local option",scored.filter(x=>x.tier==="local").sort((a,b)=>b.score-a.score)[0],"Use where data should remain on controlled hardware and the quality threshold permits it.");
+    add("Strong alternative",scored.find(x=>!picks.some(item=>item.id===x.id)),"A credible second provider for resilience, price checks, or side-by-side quality testing.");
+    return picks.slice(0,4);
+  }
 
   function evaluate(input) {
     const inventory = list(input.inventory).filter(item => item && (item.name || item.provider));
@@ -106,6 +152,7 @@
       name:[item.provider, item.name].filter(Boolean).join(" ") || "Unnamed item",
       detail:`${item.access || "subscription"} · ${item.plan || "plan not stated"} · $${number(item.cost).toFixed(2)}/month · ${item.usage || "usage not stated"}${item.purpose ? ` · ${item.purpose}` : ""}`
     }));
+    const modelRecommendations = recommendModels(input);
     const stack = [
       { label:"Primary assistant", advice:primary ? "Keep it for everyday work and define what it owns." : "Pick one assistant for daily thinking, writing, and synthesis." },
       { label:"Premium lane", advice:frontier || heavyContext ? "Reserve one premium model for demanding work; do not use it by default." : "Add premium access only when a real workflow fails the standard tier." },
@@ -125,6 +172,7 @@
       monthlySavings, annualSavings:monthlySavings * 12,
       actions:actions.slice(0, 6), stack, workflows, warnings,
       decisions:decisions.slice(0, 10), workloadSummary, inventorySummary,
+      modelRecommendations, catalogAsOf:catalog.asOf,
       summary:`Your stack scores ${score}/100. ${monthlySavings > 0 ? `About $${monthlySavings}/month appears avoidable. ` : ""}The goal is a blended stack: economical defaults with premium, local, or API capacity only where the workload requires it.`
     };
   }

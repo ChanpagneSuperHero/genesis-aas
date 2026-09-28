@@ -43,7 +43,8 @@ const expression = `(() => {
   q('#download-button').click();
   const externalRequests = performance.getEntriesByType('resource').map(x=>x.name).filter(x=>!x.startsWith(location.origin));
   const overflowing = [...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect(); return r.right > innerWidth + 1 || r.left < -1}).map(el=>({tag:el.tagName,id:el.id,class:el.className,right:Math.round(el.getBoundingClientRect().right)})).slice(0,10);
-  return { resultsVisible: !q('#results').classList.contains('hidden'), score:q('#score').textContent, savings:q('#savings').textContent, decisions:q('#decision-grid').children.length, inventory:q('#inventory-summary').children.length, profiles:q('#workload-summary').children.length, actions:q('#actions').children.length, warnings:q('#warnings').children.length, errors:q('#form-error').textContent, externalRequests, viewport:[innerWidth,innerHeight], scrollWidth:document.documentElement.scrollWidth, overflowing };
+  const modelLinks=[...q('#model-grid').querySelectorAll('a')].map(a=>a.href);
+  return { resultsVisible: !q('#results').classList.contains('hidden'), score:q('#score').textContent, savings:q('#savings').textContent, decisions:q('#decision-grid').children.length, models:q('#model-grid').children.length, modelLinks, freshness:q('#catalog-freshness').textContent, inventory:q('#inventory-summary').children.length, profiles:q('#workload-summary').children.length, actions:q('#actions').children.length, warnings:q('#warnings').children.length, errors:q('#form-error').textContent, externalRequests, viewport:[innerWidth,innerHeight], scrollWidth:document.documentElement.scrollWidth, overflowing };
 })()`;
 const result = await send("Runtime.evaluate", { expression, returnByValue: true });
 const value = result.result.value;
@@ -51,7 +52,7 @@ const resultsShot = await send("Page.captureScreenshot", { format: "png", captur
 await writeFile("/tmp/stack-doctor-mobile-results.png", Buffer.from(resultsShot.data, "base64"));
 await new Promise(r => setTimeout(r, 500));
 const downloads = await readdir(downloadPath);
-if (!value.resultsVisible || value.decisions < 3 || value.inventory !== 1 || value.profiles < 3 || value.actions < 1 || value.warnings < 1 || value.errors || value.externalRequests.length || value.scrollWidth > value.viewport[0] || !downloads.includes("ai-stack-doctor-report.html") || !downloads.includes("ai-stack-inventory.json")) throw new Error(`Browser flow failed: ${JSON.stringify({value,downloads})}`);
+if (!value.resultsVisible || value.decisions < 3 || value.models < 3 || value.modelLinks.some(x=>!x.startsWith('https://') || /utm_|ref=|affiliate/i.test(x)) || !/2026-09-28/.test(value.freshness) || value.inventory !== 1 || value.profiles < 3 || value.actions < 1 || value.warnings < 1 || value.errors || value.externalRequests.length || value.scrollWidth > value.viewport[0] || !downloads.includes("ai-stack-doctor-report.html") || !downloads.includes("ai-stack-inventory.json")) throw new Error(`Browser flow failed: ${JSON.stringify({value,downloads})}`);
 console.log(`PASS: browser assessment flow ${JSON.stringify(value)}`);
 console.log(`PASS: report download ${downloads.join(",")}`);
 ws.close();

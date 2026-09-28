@@ -42,12 +42,38 @@ function render(report) {
   $("#savings").textContent = `$${report.annualSavings.toLocaleString()}/year`;
   $("#workload-summary").innerHTML = report.workloadSummary.map((x) => `<span class="profile-chip">${escapeHtml(x)}</span>`).join("");
   $("#inventory-summary").innerHTML = report.inventorySummary.length ? report.inventorySummary.map((x) => `<div class="inventory-result"><strong>${escapeHtml(x.name)}</strong><span>${escapeHtml(x.detail)}</span></div>`).join("") : "<p class=\"helper\">No itemized inventory supplied; recommendations use your aggregate totals.</p>";
+  $("#catalog-freshness").textContent = `Catalog checked ${report.catalogAsOf}. Estimates use your workload assumptions and published API prices.`;
+  $("#model-grid").innerHTML = report.modelRecommendations.map(modelCard).join("");
   $("#decision-grid").innerHTML = report.decisions.map((x) => `<article class="decision ${escapeHtml(x.type)}"><span>${escapeHtml(x.type)}</span><h3>${escapeHtml(x.title)}</h3><p>${escapeHtml(x.reason)}</p><small>${escapeHtml(x.confidence)} confidence · ${escapeHtml(x.assumption)}</small></article>`).join("");
   $("#metric-grid").innerHTML = Object.entries(report.dimensions).map(([name, score]) => `<div class="metric"><span>${name[0].toUpperCase()+name.slice(1)}</span><strong>${score}</strong></div>`).join("");
   $("#actions").innerHTML = report.actions.map((x) => `<li>${escapeHtml(x)}</li>`).join("");
   $("#stack").innerHTML = report.stack.map((x) => `<div class="stack-item"><strong>${escapeHtml(x.label)}</strong><span>${escapeHtml(x.advice)}</span></div>`).join("");
   $("#workflows").innerHTML = report.workflows.map((x) => `<li>${escapeHtml(x)}</li>`).join("");
   $("#warnings").innerHTML = report.warnings.map((x) => `<li>${escapeHtml(x)}</li>`).join("");
+}
+
+function money(value) {
+  if (value === null || value === undefined) return "Variable pricing";
+  if (value === 0) return "$0 API usage + local hardware";
+  return `~$${Number(value).toLocaleString(undefined, {maximumFractionDigits:2})}/month API usage`;
+}
+
+function safeUrl(value) {
+  try { const url = new URL(value); return url.protocol === "https:" ? url.href : "#"; }
+  catch { return "#"; }
+}
+
+function modelCard(model) {
+  return `<article class="model-card">
+    <span class="model-role">${escapeHtml(model.role)}</span>
+    <h3>${escapeHtml(model.provider)} · ${escapeHtml(model.name)}</h3>
+    <p class="model-price">${escapeHtml(money(model.estimatedMonthlyCost))}</p>
+    <dl><div><dt>Access</dt><dd>${escapeHtml(model.plan)}</dd></div><div><dt>Mode</dt><dd>${escapeHtml(model.mode)}</dd></div></dl>
+    <p>${escapeHtml(model.why)}</p>
+    ${model.note ? `<small>${escapeHtml(model.note)}</small>` : ""}
+    <div class="model-links"><a href="${safeUrl(model.link)}" target="_blank" rel="noopener noreferrer">Official access</a><a href="${safeUrl(model.source)}" target="_blank" rel="noopener noreferrer">Pricing/source</a></div>
+    <small>${escapeHtml(model.confidence)} confidence</small>
+  </article>`;
 }
 
 function escapeHtml(value) {
@@ -87,7 +113,7 @@ function downloadInventory() {
 function downloadReport() {
   if (!latest) return;
   const date = new Date().toLocaleDateString();
-  const body = `<!doctype html><meta charset="utf-8"><title>AI Stack Doctor Report</title><style>body{font:16px system-ui;max-width:760px;margin:48px auto;padding:0 20px;line-height:1.5;color:#17211b}h1{font-size:42px}.score{font-size:64px;font-weight:800;color:#08794a}.box{border:1px solid #ccd8d0;border-radius:12px;padding:18px;margin:16px 0}li{margin:9px 0}small{color:#64736a}</style><h1>AI Stack Doctor</h1><p>Genesis AAS · ${date}</p><div class="score">${latest.score}/100</div><h2>${escapeHtml(latest.band)}</h2><p>${escapeHtml(latest.summary)}</p><div class="box"><h2>Estimated avoidable spend</h2><strong>$${latest.annualSavings.toLocaleString()}/year</strong><small><br>Directional estimate, not a guarantee.</small></div><h2>Declared model footprint</h2>${latest.inventorySummary.length ? `<ul>${latest.inventorySummary.map(x=>`<li><strong>${escapeHtml(x.name)}</strong> — ${escapeHtml(x.detail)}</li>`).join("")}</ul>` : "<p>No itemized inventory supplied.</p>"}<h2>Workload profile</h2><ul>${latest.workloadSummary.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><h2>Keep / change plan</h2>${latest.decisions.map(x=>`<div class="box"><strong>${escapeHtml(x.type.toUpperCase())}: ${escapeHtml(x.title)}</strong><p>${escapeHtml(x.reason)}</p><small>${escapeHtml(x.confidence)} confidence · ${escapeHtml(x.assumption)}</small></div>`).join("")}<h2>Next moves</h2><ol>${latest.actions.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ol><h2>Workflows to automate</h2><ol>${latest.workflows.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ol><h2>Data-boundary watchlist</h2><ul>${latest.warnings.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><hr><small>Educational diagnostic only. Your answers were processed locally in your browser.</small>`;
+  const body = `<!doctype html><meta charset="utf-8"><title>AI Stack Doctor Report</title><style>body{font:16px system-ui;max-width:760px;margin:48px auto;padding:0 20px;line-height:1.5;color:#17211b}h1{font-size:42px}.score{font-size:64px;font-weight:800;color:#08794a}.box{border:1px solid #ccd8d0;border-radius:12px;padding:18px;margin:16px 0}li{margin:9px 0}small{color:#64736a}</style><h1>AI Stack Doctor</h1><p>Genesis AAS · ${date}</p><div class="score">${latest.score}/100</div><h2>${escapeHtml(latest.band)}</h2><p>${escapeHtml(latest.summary)}</p><div class="box"><h2>Estimated avoidable spend</h2><strong>$${latest.annualSavings.toLocaleString()}/year</strong><small><br>Directional estimate, not a guarantee.</small></div><h2>Declared model footprint</h2>${latest.inventorySummary.length ? `<ul>${latest.inventorySummary.map(x=>`<li><strong>${escapeHtml(x.name)}</strong> — ${escapeHtml(x.detail)}</li>`).join("")}</ul>` : "<p>No itemized inventory supplied.</p>"}<h2>Workload profile</h2><ul>${latest.workloadSummary.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><h2>Recommended models</h2><p><small>Catalog checked ${escapeHtml(latest.catalogAsOf)}. Ranked before monetization; official links only.</small></p>${latest.modelRecommendations.map(x=>`<div class="box"><strong>${escapeHtml(x.role)}: ${escapeHtml(x.provider)} · ${escapeHtml(x.name)}</strong><p>${escapeHtml(x.why)}</p><p>${escapeHtml(x.plan)} · ${escapeHtml(x.mode)} · ${escapeHtml(money(x.estimatedMonthlyCost))}</p><small>${escapeHtml(x.confidence)} confidence${x.note ? ` · ${escapeHtml(x.note)}` : ""}</small><p><a href="${safeUrl(x.link)}">Official access</a> · <a href="${safeUrl(x.source)}">Pricing/source</a></p></div>`).join("")}<h2>Keep / change plan</h2>${latest.decisions.map(x=>`<div class="box"><strong>${escapeHtml(x.type.toUpperCase())}: ${escapeHtml(x.title)}</strong><p>${escapeHtml(x.reason)}</p><small>${escapeHtml(x.confidence)} confidence · ${escapeHtml(x.assumption)}</small></div>`).join("")}<h2>Next moves</h2><ol>${latest.actions.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ol><h2>Workflows to automate</h2><ol>${latest.workflows.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ol><h2>Data-boundary watchlist</h2><ul>${latest.warnings.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><hr><small>Educational diagnostic only. Your answers were processed locally in your browser.</small>`;
   const blob = new Blob([body], { type: "text/html" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob); a.download = "ai-stack-doctor-report.html"; a.click();
