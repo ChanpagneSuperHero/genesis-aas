@@ -14,4 +14,28 @@
 {id:"qwen3-8b-local",provider:"Local / Ollama",name:"Qwen3 8B",tier:"local",tasks:["writing","coding","automation"],context:"medium",quality:2,speed:4,modalities:["text"],input:0,output:0,plan:"Free local via Ollama",mode:"local thinking/tools; hardware and energy not included",link:"https://ollama.com/library/qwen3",source:"https://ollama.com/library"},
 {id:"gpt-oss-20b-local",provider:"Local / Ollama",name:"gpt-oss 20B",tier:"local",tasks:["coding","analysis","automation"],context:"large",quality:3,speed:3,modalities:["text"],input:0,output:0,plan:"Free local via Ollama",mode:"local reasoning/tools; hardware and energy not included",link:"https://ollama.com/library/gpt-oss",source:"https://ollama.com/library"},
 {id:"gemma3-4b-local",provider:"Local / Ollama",name:"Gemma 3 4B",tier:"local",tasks:["writing","automation","media"],context:"medium",quality:2,speed:5,modalities:["text","image"],input:0,output:0,plan:"Free local via Ollama",mode:"fast local work; hardware and energy not included",link:"https://ollama.com/library/gemma3",source:"https://ollama.com/library"}
+],plans:[
+{id:"openai-free",provider:"OpenAI",name:"ChatGPT Free",access:"subscription",cost:0,source:"https://chatgpt.com/pricing"},
+{id:"openai-plus",provider:"OpenAI",name:"ChatGPT Plus",access:"subscription",cost:20,source:"https://chatgpt.com/pricing"},
+{id:"openai-pro",provider:"OpenAI",name:"ChatGPT Pro",access:"subscription",cost:100,source:"https://chatgpt.com/pricing",note:"US web price; verify regional pricing"},
+{id:"openai-business",provider:"OpenAI",name:"ChatGPT Business — monthly seat",access:"subscription",cost:25,source:"https://chatgpt.com/pricing",note:"Per user; annual billing may differ"},
+{id:"openai-api",provider:"OpenAI",name:"OpenAI API — pay as you go",access:"api",cost:0,source:"https://platform.openai.com/docs/pricing",metered:true},
+{id:"anthropic-free",provider:"Anthropic",name:"Claude Free",access:"subscription",cost:0,source:"https://claude.com/pricing"},
+{id:"anthropic-pro",provider:"Anthropic",name:"Claude Pro — monthly",access:"subscription",cost:20,source:"https://claude.com/pricing"},
+{id:"anthropic-max5",provider:"Anthropic",name:"Claude Max 5x",access:"subscription",cost:100,source:"https://support.claude.com/en/articles/11049741-what-is-the-max-plan"},
+{id:"anthropic-max20",provider:"Anthropic",name:"Claude Max 20x",access:"subscription",cost:200,source:"https://support.claude.com/en/articles/11049741-what-is-the-max-plan"},
+{id:"anthropic-team",provider:"Anthropic",name:"Claude Team Standard — monthly seat",access:"subscription",cost:25,source:"https://support.claude.com/en/articles/9266767-what-is-the-team-plan",note:"Per user; annual billing may differ"},
+{id:"anthropic-api",provider:"Anthropic",name:"Claude API — pay as you go",access:"api",cost:0,source:"https://docs.anthropic.com/en/docs/about-claude/models/overview",metered:true},
+{id:"google-free",provider:"Google",name:"Gemini Free",access:"subscription",cost:0,source:"https://gemini.google/subscriptions/"},
+{id:"google-plus",provider:"Google",name:"Google AI Plus",access:"subscription",cost:4.99,source:"https://gemini.google/subscriptions/"},
+{id:"google-pro",provider:"Google",name:"Google AI Pro",access:"subscription",cost:19.99,source:"https://gemini.google/subscriptions/"},
+{id:"google-ultra",provider:"Google",name:"Google AI Ultra — starting price",access:"subscription",cost:99.99,source:"https://one.google.com/about/google-ai-plans",note:"Starts at this price; verify tier and region"},
+{id:"google-api",provider:"Google",name:"Gemini API — paid",access:"api",cost:0,source:"https://ai.google.dev/gemini-api/docs/pricing",metered:true},
+{id:"xai-free",provider:"xAI",name:"Grok Free",access:"subscription",cost:0,source:"https://x.ai/pricing"},
+{id:"xai-supergrok",provider:"xAI",name:"SuperGrok",access:"subscription",cost:30,source:"https://x.ai/pricing"},
+{id:"xai-supergrok-plus",provider:"xAI",name:"SuperGrok Plus",access:"subscription",cost:100,source:"https://x.ai/pricing"},
+{id:"xai-api",provider:"xAI",name:"xAI API — pay as you go",access:"api",cost:0,source:"https://x.ai/pricing",metered:true},
+{id:"openrouter-standard",provider:"OpenRouter",name:"OpenRouter Standard — pay as you go",access:"api",cost:0,source:"https://openrouter.ai/pricing",metered:true},
+{id:"ollama-local",provider:"Local / Ollama",name:"Ollama — free local",access:"local",cost:0,source:"https://ollama.com/library"},
+{id:"other-unknown",provider:"Other / not listed",name:"Plan not listed",access:"subscription",cost:0,source:"#",note:"Excluded from savings until cataloged"}
 ]}});

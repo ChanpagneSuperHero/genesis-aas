@@ -58,24 +58,20 @@
             </select>
           </label>
           <label class="field">Biggest AI frustration
-            <textarea name="pain" maxlength="240" placeholder="Example: I pay for four tools and still copy the same context between them."></textarea>
+            <select name="pain"><option value="">Choose one</option><option>Too many overlapping subscriptions</option><option>Unsure which model fits each task</option><option>Costs are unpredictable</option><option>Quality is inconsistent</option><option>Context is scattered between tools</option><option>Privacy and data handling are unclear</option><option>Automation is difficult to maintain</option></select>
           </label>
         </fieldset>
 
         <fieldset class="step" data-step="2">
           <legend>How fragmented is the stack?</legend>
           <div class="two-col">
-            <label class="field">Paid AI tools<input name="tools" type="number" min="0" max="50" value="4" required></label>
-            <label class="field">Used in the last 30 days<input name="activeTools" type="number" min="0" max="50" value="2" required></label>
-            <label class="field">Monthly AI spend ($)<input name="spend" type="number" min="0" max="10000" value="80" required></label>
-            <label class="field">Monthly API spend ($)<input name="apiSpend" type="number" min="0" max="10000" value="0" required></label>
-            <label class="field">Repeat-work hours per week<input name="repeatHours" type="number" min="0" max="80" value="5" required></label>
-            <label class="field">Projects or workflows supported<input name="projectCount" type="number" min="1" max="100" value="2" required></label>
+            <label class="field">Repeat-work hours per week<select name="repeatHours"><option value="0">None</option><option value="2">1–3 hours</option><option value="6" selected>4–8 hours</option><option value="12">9–15 hours</option><option value="20">More than 15 hours</option></select></label>
+            <label class="field">Projects or workflows supported<select name="projectCount"><option value="1">One</option><option value="3" selected>2–4</option><option value="8">5–10</option><option value="15">More than 10</option></select></label>
           </div>
           <div class="choice-row"><span>Do multiple tools perform the same job?</span><label><input type="radio" name="overlap" value="yes" required> Yes</label><label><input type="radio" name="overlap" value="no"> No</label></div>
           <div class="choice-row"><span>Do you have one primary assistant?</span><label><input type="radio" name="primary" value="yes" required> Yes</label><label><input type="radio" name="primary" value="no"> No</label></div>
           <section class="inventory-builder">
-            <div class="inventory-head"><div><h3>Model and tool inventory</h3><p class="helper">Optional, but it produces model-specific recommendations. Do not enter passwords, API keys, tokens, or account numbers.</p></div><button type="button" class="button ghost" id="add-inventory">Add a model or tool</button></div>
+            <div class="inventory-head"><div><h3>Which AI products do you use?</h3><p class="helper">Choose from the catalog. Stack Doctor fills in the provider, plan price, and access type—never enter passwords, API keys, or account numbers.</p></div><button type="button" class="button ghost" id="add-inventory">Add an AI product</button></div>
             <div id="inventory-rows"></div>
             <div class="inventory-actions"><label class="button ghost file-button">Import local JSON<input id="inventory-import" type="file" accept="application/json,.json"></label><button type="button" class="button ghost" id="inventory-export">Export inventory JSON</button></div>
             <p class="helper">Import and analysis happen only in this browser. This version never connects to provider accounts.</p>
@@ -93,7 +89,7 @@
             <label><input type="checkbox" name="taskTypes" value="media"> Image, audio, or video</label>
             <label><input type="checkbox" name="taskTypes" value="automation"> Agents & automation</label>
           </div>
-          <label class="field">Name the most important workflow<input name="workflowName" maxlength="100" placeholder="Example: weekly client research report"></label>
+          <label class="field">Most important workflow<select name="workflowName"><option value="">Choose one</option><option>Writing and document production</option><option>Research and synthesis</option><option>Software development</option><option>Customer support and communications</option><option>Sales and marketing</option><option>Data analysis and decisions</option><option>Operations and automation</option><option>Image, audio, or video creation</option></select></label>
           <div class="slider-grid">
             <label class="range-field"><span>Required quality <output data-for="quality">3</output></span><input name="quality" type="range" min="1" max="5" value="3"><small>Good enough → best available</small></label>
             <label class="range-field"><span>Cost sensitivity <output data-for="costSensitivity">3</output></span><input name="costSensitivity" type="range" min="1" max="5" value="3"><small>Cost secondary → minimize spend</small></label>
@@ -107,9 +103,9 @@
               <label class="field">Context required<select name="contextSize"><option value="small">Small — prompts and short files</option><option value="medium" selected>Medium — several documents</option><option value="large">Large — repositories or long research</option><option value="maximum">Maximum available context</option></select></label>
               <label class="field">Typical output<select name="outputSize"><option value="short">Short answers</option><option value="medium" selected>Documents or moderate code</option><option value="large">Long reports or large code changes</option></select></label>
               <label class="field">Reasoning depth<select name="reasoningDepth"><option value="routine">Routine transformation</option><option value="skilled" selected>Skilled professional work</option><option value="frontier">Difficult judgment / frontier work</option></select></label>
-              <label class="field">Runs per month<input name="runsPerMonth" type="number" min="1" max="100000" value="40"></label>
+              <label class="field">Runs per month<select name="runsPerMonth"><option value="10">Fewer than 20</option><option value="40" selected>20–75</option><option value="150">76–250</option><option value="500">251–1,000</option><option value="2000">More than 1,000</option></select></label>
               <label class="field">Maximum wait<select name="maxLatency"><option value="seconds">Seconds</option><option value="minutes" selected>Several minutes</option><option value="hours">Hours is acceptable</option></select></label>
-              <label class="field">Hard monthly ceiling ($)<input name="budgetCap" type="number" min="0" max="100000" value="100"></label>
+              <label class="field">Hard monthly ceiling<select name="budgetCap"><option value="0">Free only</option><option value="25">Up to $25</option><option value="50">Up to $50</option><option value="100" selected>Up to $100</option><option value="250">Up to $250</option><option value="500">Up to $500</option><option value="1000">More than $500</option></select></label>
             </div>
             <div class="check-grid">
               <label><input type="checkbox" name="capabilities" value="web"> Current web information</label>

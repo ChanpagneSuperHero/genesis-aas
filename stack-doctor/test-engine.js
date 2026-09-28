@@ -1,5 +1,8 @@
 const assert = require("node:assert/strict");
 const { evaluate } = require("./engine.js");
+const catalog = require("./catalog.js");
+assert.ok(catalog.plans.length >= 20);
+assert.ok(catalog.plans.every(x => Number.isFinite(x.cost) && x.provider && x.name && x.access));
 
 const healthy = evaluate({role:"founder",tools:2,activeTools:2,spend:40,apiSpend:0,repeatHours:6,overlap:"no",primary:"yes",renewals:"yes",privacyReview:"yes",exports:"yes",automation:"yes",humanReview:"yes",quality:3,costSensitivity:2,privacyPriority:2,failureTolerance:2,contextSize:"medium",reasoningDepth:"skilled",runsPerMonth:40,budgetCap:100,sensitive:[],taskTypes:["writing"],capabilities:[]});
 assert.ok(healthy.score >= 75);

@@ -31,12 +31,16 @@ const landingShot = await send("Page.captureScreenshot", { format: "png", captur
 await writeFile("/tmp/stack-doctor-mobile-landing.png", Buffer.from(landingShot.data, "base64"));
 const expression = `(() => {
   const q=s=>document.querySelector(s);
-  const set=(el,value)=>{el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));};
+  const set=(el,value)=>{el.value=value;el.dispatchEvent(new Event(el.tagName==='SELECT'?'change':'input',{bubbles:true}));};
   q('#start-button').click();
   q('[name=role]').value='team'; q('[name=goal]').value='Reduce costs'; q('[name=pain]').value='Too many overlapping tools'; q('#next-button').click();
-  q('[name=tools]').value='10'; q('[name=activeTools]').value='3'; q('[name=spend]').value='300'; q('[name=repeatHours]').value='10'; q('[name=overlap][value=yes]').checked=true; q('[name=primary][value=no]').checked=true; q('#next-button').click();
+  q('[name=repeatHours]').value='12'; q('[name=projectCount]').value='8'; q('[name=overlap][value=yes]').checked=true; q('[name=primary][value=no]').checked=true; q('#next-button').click();
   q('#back-button').click(); q('#add-inventory').click();
-  set(q('.inventory-row [data-key=provider]'),'Anthropic'); set(q('.inventory-row [data-key=name]'),'Claude'); set(q('.inventory-row [data-key=access]'),'subscription'); set(q('.inventory-row [data-key=plan]'),'Pro'); set(q('.inventory-row [data-key=cost]'),'20'); set(q('.inventory-row [data-key=usage]'),'unused'); set(q('.inventory-row [data-key=purpose]'),'Writing'); q('#inventory-export').click(); q('#next-button').click();
+  set(q('.inventory-row [data-key=provider]'),'Anthropic'); set(q('.inventory-row [data-key=modelId]'),'claude-sonnet-5-5'); set(q('.inventory-row [data-key=planId]'),'anthropic-pro'); set(q('.inventory-row [data-key=usage]'),'unused'); set(q('.inventory-row [data-key=purpose]'),'writing');
+  const inventoryControlTypes=[...q('.inventory-row').querySelectorAll('[data-key]')].map(x=>x.tagName);
+  const catalogPrice=q('.catalog-price').textContent;
+  const inventoryOverflow=[...q('.inventory-row').querySelectorAll('*')].some(el=>el.getBoundingClientRect().right>innerWidth+1);
+  q('#inventory-export').click(); q('#next-button').click();
   q('[name=taskTypes][value=research]').checked=true; q('[name=taskTypes][value=automation]').checked=true; q('[name=workflowName]').value='Weekly market intelligence'; q('[name=quality]').value='5'; q('[name=costSensitivity]').value='5'; q('[name=privacyPriority]').value='5'; q('[name=failureTolerance]').value='5'; q('[name=contextSize]').value='large'; q('[name=outputSize]').value='large'; q('[name=reasoningDepth]').value='frontier'; q('[name=runsPerMonth]').value='12'; q('[name=budgetCap]').value='150'; q('[name=capabilities][value=local]').checked=true; q('#next-button').click();
   q('[name=sensitive][value=customer]').checked=true; q('[name=sensitive][value=credentials]').checked=true; q('[name=privacyReview][value=no]').checked=true; q('[name=exports][value=no]').checked=true; q('#next-button').click();
   q('[name=renewals][value=no]').checked=true; q('[name=automation][value=no]').checked=true; q('[name=humanReview][value=no]').checked=true; q('.consent input').checked=true; q('#doctor-form').requestSubmit();
@@ -44,7 +48,7 @@ const expression = `(() => {
   const externalRequests = performance.getEntriesByType('resource').map(x=>x.name).filter(x=>!x.startsWith(location.origin));
   const overflowing = [...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect(); return r.right > innerWidth + 1 || r.left < -1}).map(el=>({tag:el.tagName,id:el.id,class:el.className,right:Math.round(el.getBoundingClientRect().right)})).slice(0,10);
   const modelLinks=[...q('#model-grid').querySelectorAll('a')].map(a=>a.href);
-  return { resultsVisible: !q('#results').classList.contains('hidden'), score:q('#score').textContent, savings:q('#savings').textContent, decisions:q('#decision-grid').children.length, models:q('#model-grid').children.length, modelLinks, freshness:q('#catalog-freshness').textContent, inventory:q('#inventory-summary').children.length, profiles:q('#workload-summary').children.length, actions:q('#actions').children.length, warnings:q('#warnings').children.length, errors:q('#form-error').textContent, externalRequests, viewport:[innerWidth,innerHeight], scrollWidth:document.documentElement.scrollWidth, overflowing };
+  return { resultsVisible: !q('#results').classList.contains('hidden'), score:q('#score').textContent, savings:q('#savings').textContent, decisions:q('#decision-grid').children.length, models:q('#model-grid').children.length, modelLinks, freshness:q('#catalog-freshness').textContent, inventory:q('#inventory-summary').children.length, profiles:q('#workload-summary').children.length, typedInventoryFields:q('#inventory-rows').querySelectorAll('input:not([type=file]),textarea').length, inventoryControlTypes,catalogPrice,inventoryOverflow,actions:q('#actions').children.length, warnings:q('#warnings').children.length, errors:q('#form-error').textContent, externalRequests, viewport:[innerWidth,innerHeight], scrollWidth:document.documentElement.scrollWidth, overflowing };
 })()`;
 const result = await send("Runtime.evaluate", { expression, returnByValue: true });
 const value = result.result.value;
@@ -52,7 +56,7 @@ const resultsShot = await send("Page.captureScreenshot", { format: "png", captur
 await writeFile("/tmp/stack-doctor-mobile-results.png", Buffer.from(resultsShot.data, "base64"));
 await new Promise(r => setTimeout(r, 500));
 const downloads = await readdir(downloadPath);
-if (!value.resultsVisible || value.decisions < 3 || value.models < 3 || value.modelLinks.some(x=>!x.startsWith('https://') || /utm_|ref=|affiliate/i.test(x)) || !/2026-09-28/.test(value.freshness) || value.inventory !== 1 || value.profiles < 3 || value.actions < 1 || value.warnings < 1 || value.errors || value.externalRequests.length || value.scrollWidth > value.viewport[0] || !downloads.includes("ai-stack-doctor-report.html") || !downloads.includes("ai-stack-inventory.json")) throw new Error(`Browser flow failed: ${JSON.stringify({value,downloads})}`);
+if (!value.resultsVisible || value.decisions < 3 || value.models < 3 || value.modelLinks.some(x=>!x.startsWith('https://') || /utm_|ref=|affiliate/i.test(x)) || !/2026-09-28/.test(value.freshness) || value.inventory !== 1 || value.profiles < 3 || value.typedInventoryFields !== 0 || value.inventoryControlTypes.some(x=>x!=="SELECT") || !value.catalogPrice.includes("$20.00/month") || value.inventoryOverflow || value.actions < 1 || value.warnings < 1 || value.errors || value.externalRequests.length || value.scrollWidth > value.viewport[0] || !downloads.includes("ai-stack-doctor-report.html") || !downloads.includes("ai-stack-inventory.json")) throw new Error(`Browser flow failed: ${JSON.stringify({value,downloads})}`);
 console.log(`PASS: browser assessment flow ${JSON.stringify(value)}`);
 console.log(`PASS: report download ${downloads.join(",")}`);
 ws.close();

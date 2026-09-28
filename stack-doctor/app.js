@@ -3,6 +3,7 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 let step = 1;
 let latest = null;
 let inventory = [];
+const inventoryCatalog = globalThis.StackDoctorCatalog || { models:[], plans:[] };
 
 const assessment = $("#assessment");
 const hero = $("#hero");
@@ -31,7 +32,12 @@ function currentStepValid() {
 
 function values() {
   const data = new FormData(form);
-  return Object.fromEntries([...data.entries()].filter(([key]) => !["sensitive","taskTypes","capabilities"].includes(key)).concat([["sensitive", data.getAll("sensitive")],["taskTypes", data.getAll("taskTypes")],["capabilities", data.getAll("capabilities")],["inventory", inventory.map((item) => ({...item}))]]));
+  const result = Object.fromEntries([...data.entries()].filter(([key]) => !["sensitive","taskTypes","capabilities"].includes(key)).concat([["sensitive", data.getAll("sensitive")],["taskTypes", data.getAll("taskTypes")],["capabilities", data.getAll("capabilities")],["inventory", inventory.map((item) => ({...item}))]]));
+  result.tools = inventory.filter(item => item.cost > 0).length;
+  result.activeTools = inventory.filter(item => item.usage !== "unused").length;
+  result.spend = inventory.filter(item => item.access !== "api").reduce((sum,item)=>sum+Number(item.cost||0),0);
+  result.apiSpend = inventory.filter(item => item.access === "api").reduce((sum,item)=>sum+Number(item.cost||0),0);
+  return result;
 }
 
 function render(report) {
@@ -80,16 +86,44 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
 }
 
-function inventoryRow(item, index) {
-  const option = (value, label, selected) => `<option value="${value}"${selected === value ? " selected" : ""}>${label}</option>`;
+function option(value, label, selected) {
+  return `<option value="${escapeHtml(value)}"${selected === value ? " selected" : ""}>${escapeHtml(label)}</option>`;
+}
+
+function providers() {
+  return [...new Set([...inventoryCatalog.models.map(x=>x.provider), ...inventoryCatalog.plans.map(x=>x.provider)])];
+}
+
+function modelsFor(provider) {
+  const rows = inventoryCatalog.models.filter(x=>x.provider===provider);
+  return rows.length ? rows : [{id:"other-unknown-model",name:"Not listed / unsure"}];
+}
+
+function plansFor(provider) {
+  const rows = inventoryCatalog.plans.filter(x=>x.provider===provider);
+  return rows.length ? rows : inventoryCatalog.plans.filter(x=>x.id==="other-unknown");
+}
+
+function normalizeInventoryItem(item={}) {
+  const provider = providers().includes(item.provider) ? item.provider : "Other / not listed";
+  const models = modelsFor(provider);
+  const plans = plansFor(provider);
+  const model = models.find(x=>x.id===item.modelId) || models.find(x=>x.name===item.name) || models[0];
+  const plan = plans.find(x=>x.id===item.planId) || plans.find(x=>x.name===item.plan) || plans[0];
+  return {provider,modelId:model.id,name:model.name,planId:plan.id,plan:plan.name,access:plan.access,cost:plan.cost,usage:["daily","weekly","monthly","rare","unused"].includes(item.usage)?item.usage:"weekly",purpose:item.purpose||"general",metered:Boolean(plan.metered),source:plan.source};
+}
+
+function inventoryRow(rawItem, index) {
+  const item = normalizeInventoryItem(rawItem);
+  inventory[index] = item;
+  const price = item.metered ? "Metered usage · no fixed monthly fee" : `$${Number(item.cost).toFixed(2)}/month catalog price`;
   return `<div class="inventory-row" data-index="${index}">
-    <label>Provider<input data-key="provider" maxlength="60" value="${escapeHtml(item.provider || "")}" placeholder="Anthropic, OpenAI, Google..."></label>
-    <label>Model or tool<input data-key="name" maxlength="80" value="${escapeHtml(item.name || "")}" placeholder="Claude, ChatGPT, Gemini..."></label>
-    <label>Access<select data-key="access">${option("subscription","Subscription",item.access)}${option("oauth","OAuth / bundled login",item.access)}${option("api","Metered API",item.access)}${option("local","Local model",item.access)}</select></label>
-    <label>Plan<input data-key="plan" maxlength="60" value="${escapeHtml(item.plan || "")}" placeholder="Free, Pro, Team, pay-as-you-go"></label>
-    <label>Monthly cost ($)<input data-key="cost" type="number" min="0" max="100000" step="0.01" value="${Number(item.cost || 0)}"></label>
+    <label>Provider<select data-key="provider">${providers().map(x=>option(x,x,item.provider)).join("")}</select></label>
+    <label>Model<select data-key="modelId">${modelsFor(item.provider).map(x=>option(x.id,x.name,item.modelId)).join("")}</select></label>
+    <label>Plan / access<select data-key="planId">${plansFor(item.provider).map(x=>option(x.id,x.name,item.planId)).join("")}</select></label>
     <label>Use<select data-key="usage">${option("daily","Daily",item.usage)}${option("weekly","Weekly",item.usage)}${option("monthly","Monthly",item.usage)}${option("rare","Rarely",item.usage)}${option("unused","Not in 30 days",item.usage)}</select></label>
-    <label class="purpose">Primary purpose<input data-key="purpose" maxlength="100" value="${escapeHtml(item.purpose || "")}" placeholder="Coding, research, image generation..."></label>
+    <label>Primary purpose<select data-key="purpose">${option("general","General assistant",item.purpose)}${option("writing","Writing",item.purpose)}${option("coding","Coding",item.purpose)}${option("research","Research",item.purpose)}${option("analysis","Analysis",item.purpose)}${option("media","Media creation",item.purpose)}${option("automation","Automation",item.purpose)}</select></label>
+    <div class="catalog-price"><span>${escapeHtml(price)}</span><small>${escapeHtml(item.access)} · checked ${escapeHtml(inventoryCatalog.asOf)} · <a href="${safeUrl(item.source)}" target="_blank" rel="noopener noreferrer">pricing source</a></small></div>
     <button type="button" class="remove-inventory" aria-label="Remove ${escapeHtml(item.name || "item")}">×</button>
   </div>`;
 }
@@ -99,12 +133,12 @@ function renderInventory() {
 }
 
 function addInventoryItem(item = {}) {
-  inventory.push({ provider:"", name:"", access:"subscription", plan:"", cost:0, usage:"weekly", purpose:"", ...item });
+  inventory.push(normalizeInventoryItem({ provider:"OpenAI", usage:"weekly", purpose:"general", ...item }));
   renderInventory();
 }
 
 function downloadInventory() {
-  const blob = new Blob([JSON.stringify({ version:1, exportedAt:new Date().toISOString(), items:inventory }, null, 2)], { type:"application/json" });
+  const blob = new Blob([JSON.stringify({ version:2, catalogAsOf:inventoryCatalog.asOf, exportedAt:new Date().toISOString(), items:inventory }, null, 2)], { type:"application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob); a.download = "ai-stack-inventory.json"; a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
@@ -125,10 +159,16 @@ $("#next-button").addEventListener("click", () => { if (currentStepValid()) show
 $("#back-button").addEventListener("click", () => showStep(step - 1));
 $("#add-inventory").addEventListener("click", () => addInventoryItem());
 $("#inventory-export").addEventListener("click", downloadInventory);
-$("#inventory-rows").addEventListener("input", (event) => {
+$("#inventory-rows").addEventListener("change", (event) => {
   const row = event.target.closest(".inventory-row");
   if (!row || !event.target.dataset.key) return;
-  inventory[Number(row.dataset.index)][event.target.dataset.key] = event.target.value;
+  const index = Number(row.dataset.index);
+  const key = event.target.dataset.key;
+  if (key === "provider") inventory[index] = normalizeInventoryItem({provider:event.target.value,usage:inventory[index].usage,purpose:inventory[index].purpose});
+  else if (key === "modelId") inventory[index] = normalizeInventoryItem({...inventory[index],modelId:event.target.value});
+  else if (key === "planId") inventory[index] = normalizeInventoryItem({...inventory[index],planId:event.target.value});
+  else inventory[index][key] = event.target.value;
+  renderInventory();
 });
 $("#inventory-rows").addEventListener("click", (event) => {
   const button = event.target.closest(".remove-inventory");
@@ -139,8 +179,8 @@ $("#inventory-rows").addEventListener("click", (event) => {
 $("#inventory-import").addEventListener("change", async (event) => {
   try {
     const parsed = JSON.parse(await event.target.files[0].text());
-    if (!parsed || parsed.version !== 1 || !Array.isArray(parsed.items) || parsed.items.length > 100) throw new Error("Use a Stack Doctor inventory v1 JSON file with no more than 100 items.");
-    inventory = parsed.items.map((item) => ({ provider:String(item.provider || "").slice(0,60), name:String(item.name || "").slice(0,80), access:["subscription","oauth","api","local"].includes(item.access) ? item.access : "subscription", plan:String(item.plan || "").slice(0,60), cost:Math.max(0, Number(item.cost || 0)), usage:["daily","weekly","monthly","rare","unused"].includes(item.usage) ? item.usage : "weekly", purpose:String(item.purpose || "").slice(0,100) }));
+    if (!parsed || ![1,2].includes(parsed.version) || !Array.isArray(parsed.items) || parsed.items.length > 100) throw new Error("Use a Stack Doctor inventory v1 or v2 JSON file with no more than 100 items.");
+    inventory = parsed.items.map(normalizeInventoryItem);
     renderInventory(); error.textContent = "Inventory imported locally.";
   } catch (err) { error.textContent = err.message || "Could not import that inventory."; }
   event.target.value = "";
