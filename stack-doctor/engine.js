@@ -70,6 +70,32 @@
     return picks.slice(0,4);
   }
 
+  function analyzeAgentFootprint(input) {
+    const items = list(input.agentFootprint).filter(item => item && item.category);
+    const findings = [];
+    const add = (type, severity, title, reason, remediation) => findings.push({type,severity,title,reason,remediation});
+    const label = item => item.name || item.category;
+    items.forEach(item => {
+      if (item.usage === "unused") add("unused","medium",label(item),"This component has not been used in 30 days but may still retain access, sessions, files, or recurring work.","Disable its jobs, revoke access, archive required outputs, and remove retained sessions only after export verification.");
+      if (item.overlap === "yes") add("overlap","medium",label(item),"Another agent or component performs substantially the same role, increasing cost and ambiguity about ownership.","Choose one owner for the role and retire or narrow the duplicate.");
+      if (["readwrite","admin"].includes(item.access) && ["unknown","none"].includes(item.approval)) add("access","high",label(item),`${item.access === "admin" ? "Administrative" : "Read/write"} access is not paired with a clear approval boundary.`,"Reduce to read-only where possible and require explicit approval for external, financial, destructive, merge, publish, or credential actions.");
+      if (["community","unknown"].includes(item.provenance)) add("provenance",item.provenance === "unknown" ? "high" : "medium",label(item),"The template, plugin, skill, or automation does not have verified first-party or internally reviewed provenance.","Freeze source URL/version/hash, inspect instructions and requested integrations, and record the reviewer before activation.");
+      if (["durable","unknown"].includes(item.persistence)) add("persistence","high",label(item),"Credentials, browser sessions, files, or tokens may persist beyond the task or after the visible agent is deleted.","Document the storage location, revoke at the source, sign out sessions, remove durable files, and verify deletion independently.");
+      if (["none","unknown"].includes(item.approval) && item.external === "yes") add("approval","high",label(item),"The component can affect an external system without a dependable human-approval boundary.","Add an ask-first gate showing the target, current value, proposed change, and expected impact.");
+      if (["none","unknown"].includes(item.audit)) add("audit","high",label(item),"There is no reliable action log or attribution trail for this component.","Record actor, tool, target, inputs, result, model/route, timestamp, and receipt hash for consequential actions.");
+      if (["none","unknown"].includes(item.recovery)) add("recovery","high",label(item),"Recovery or offboarding is missing or untested.","Create and test disable, revoke, export, rollback, and retained-state cleanup steps.");
+    });
+    const high = findings.filter(x=>x.severity === "high").length;
+    const medium = findings.filter(x=>x.severity === "medium").length;
+    const score = clamp(100 - high * 12 - medium * 6);
+    const counts = items.reduce((acc,item)=>{ acc[item.category]=(acc[item.category]||0)+1; return acc; },{});
+    const summary = items.map(item=>({
+      name:label(item),
+      detail:`${item.category} · ${item.usage || "usage unknown"} · ${item.access || "access unknown"} · ${item.provenance || "provenance unknown"}`
+    }));
+    return {items,findings,score,counts,summary,high,medium};
+  }
+
   function evaluate(input) {
     const inventory = list(input.inventory).filter(item => item && (item.name || item.provider));
     const declaredInventorySpend = inventory.reduce((sum, item) => sum + number(item.cost), 0);
@@ -116,7 +142,9 @@
     const privacy = clamp(82 - sensitive.length * 7 + (privacyReview ? 16 : -18) + (exports ? 8 : -8) + (localRequired ? 6 : 0));
     const leverage = clamp(40 + Math.min(repeatHours, 12) * 4 + (input.automation === "yes" ? 15 : -5));
     const fit = clamp(65 + (frontier ? quality * 3 : 5) + (heavyContext ? 5 : 0) - (tools > 8 ? 10 : 0) - (!humanReview && failureConsequence >= 4 ? 20 : 0));
-    const score = clamp((focus + cost + privacy + leverage + fit) / 5);
+    const agentFootprint = analyzeAgentFootprint(input);
+    const agentControl = agentFootprint.items.length ? agentFootprint.score : 100;
+    const score = clamp((focus + cost + privacy + leverage + fit + agentControl) / 6);
     let band = "Needs attention";
     if (score >= 80) band = "Sovereign and focused";
     else if (score >= 65) band = "Healthy with clear upgrades";
@@ -186,11 +214,15 @@
     if (!humanReview && failureConsequence >= 4) warnings.push("High-consequence work lacks a stated human-review gate.");
     if (!warnings.length) warnings.push("Even low-risk work should have a clear export and account-revocation path.");
     return {
-      score, band, dimensions:{ focus, cost, privacy, leverage, fit },
+      score, band, dimensions:{ focus, cost, privacy, leverage, fit, agentControl },
       monthlySavings, annualSavings:monthlySavings * 12,
       actions:actions.slice(0, 6), stack, workflows, warnings,
       decisions:decisions.slice(0, 10), workloadSummary, inventorySummary,
       modelRecommendations, prescription, catalogAsOf:catalog.asOf,
+      agentFootprintSummary:agentFootprint.summary,
+      agentRiskFindings:agentFootprint.findings,
+      agentFootprintScore:agentFootprint.score,
+      agentFootprintCounts:agentFootprint.counts,
       summary:`Your stack scores ${score}/100. ${monthlySavings > 0 ? `About $${monthlySavings}/month appears avoidable. ` : ""}The goal is a blended stack: economical defaults with premium, local, or API capacity only where the workload requires it.`
     };
   }

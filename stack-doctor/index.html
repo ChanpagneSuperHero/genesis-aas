@@ -26,7 +26,7 @@
     <section class="hero" id="hero">
       <div class="eyebrow">AI STACK DOCTOR · YOUR AI SUBSCRIPTION OPTIMIZER</div>
       <h1>Stop overpaying for AI.</h1>
-      <p class="hero-copy">Find what to keep, cancel, downgrade, move to API, or run locally—based on the work you actually do.</p>
+      <p class="hero-copy">Find what to keep, cancel, downgrade, move to API, or run locally—and what your agents, plugins, credentials, and recurring jobs can access, change, retain, and recover.</p>
       <div class="hero-actions">
         <button class="button primary" id="start-button">Diagnose my stack</button>
         <span>No login. No bank connection. No prompts uploaded.</span>
@@ -35,6 +35,7 @@
         <article><strong>Workload fit</strong><span>Match quality and tokens to real tasks</span></article>
         <article><strong>Savings estimate</strong><span>Find overlap, idle plans, and wrong tiers</span></article>
         <article><strong>Action plan</strong><span>Keep, cancel, downgrade, API, or local</span></article>
+        <article><strong>Agent Footprint</strong><span>Find hidden access, persistence, approval, audit, and recovery gaps</span></article>
       </div>
     </section>
 
@@ -75,6 +76,12 @@
             <div id="inventory-rows"></div>
             <div class="inventory-actions"><label class="button ghost file-button">Import local JSON<input id="inventory-import" type="file" accept="application/json,.json"></label><button type="button" class="button ghost" id="inventory-export">Export inventory JSON</button></div>
             <p class="helper">Import and analysis happen only in this browser. This version never connects to provider accounts.</p>
+          </section>
+          <section class="inventory-builder agent-footprint-builder">
+            <div class="inventory-head"><div><h3>Agent Footprint</h3><p class="helper">Inventory the Bots, templates, MCPs, plugins, routines, repositories, credentials, permissions, and recurring jobs around your AI stack. Choose categories only—never enter secrets.</p></div><button type="button" class="button ghost" id="add-agent-component">Add a component</button></div>
+            <div id="agent-footprint-rows"></div>
+            <div class="inventory-actions"><button type="button" class="button ghost" id="agent-footprint-export">Export Agent Footprint JSON</button></div>
+            <p class="helper">Before you install an AI engineering team, know exactly what it can access, change, retain, and recover.</p>
           </section>
         </fieldset>
 
@@ -154,6 +161,8 @@
       <div class="savings-card"><div><span>Estimated avoidable spend</span><strong id="savings">$0/year</strong></div><p>Directional estimate based on inactive tools, overlap, and renewal controls—not a guarantee.</p></div>
       <article class="panel workload-summary"><h3>Your workload profile</h3><div id="workload-summary"></div></article>
       <article class="panel inventory-summary"><h3>Your declared model footprint</h3><div id="inventory-summary"></div></article>
+      <article class="panel inventory-summary"><h3>Your Agent Footprint</h3><p class="helper" id="agent-footprint-score"></p><div id="agent-footprint-summary"></div></article>
+      <section class="agent-risk-section"><div class="recommendation-head"><div><div class="eyebrow">AGENT CONTROL REVIEW</div><h2>What can access, change, retain, and recover?</h2></div></div><div class="decision-grid" id="agent-risk-grid"></div></section>
       <section class="model-recommendations"><div class="recommendation-head"><div><h2>Your recommended stack comparison</h2><p>Compare the strongest fit, economical route, premium escalation, and private alternative for your declared work.</p><p id="catalog-freshness" class="helper"></p></div><span class="affiliate-note">Official links · no affiliate ranking</span></div><div class="model-grid" id="model-grid"></div></section>
       <section class="prescription"><div class="recommendation-head"><div><h2>Your prescription</h2><p class="helper">A direct keep, add, cancel, and route plan—not a generic leaderboard.</p></div></div><div class="prescription-grid" id="prescription-grid"></div></section>
       <div class="decision-grid" id="decision-grid"></div>

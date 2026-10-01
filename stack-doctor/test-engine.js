@@ -34,8 +34,15 @@ assert.equal(inventoried.inventorySummary.length, 2);
 assert.equal(inventoried.monthlySavings, 20);
 assert.ok(inventoried.decisions.some(x => x.type === "cancel" && /Claude/.test(x.title)));
 
+const agentRisk = evaluate({role:"developer",overlap:"no",primary:"yes",renewals:"yes",privacyReview:"yes",exports:"yes",automation:"yes",humanReview:"yes",quality:4,costSensitivity:3,privacyPriority:4,failureTolerance:5,contextSize:"large",reasoningDepth:"frontier",runsPerMonth:40,sensitive:["credentials"],taskTypes:["coding","automation"],capabilities:["tools"],agentFootprint:[{category:"template",name:"Community template",usage:"unused",provenance:"unknown",access:"admin",persistence:"durable",approval:"none",audit:"none",recovery:"none",external:"yes",overlap:"yes"}]});
+assert.equal(agentRisk.agentFootprintSummary.length,1);
+assert.ok(agentRisk.agentFootprintScore < 30);
+assert.ok(["unused","overlap","access","provenance","persistence","approval","audit","recovery"].every(type=>agentRisk.agentRiskFindings.some(x=>x.type===type)));
+assert.ok(agentRisk.agentRiskFindings.every(x=>x.remediation));
+
 const zero = evaluate({role:"creator",tools:0,activeTools:0,spend:0,apiSpend:0,repeatHours:0,overlap:"no",primary:"no",renewals:"no",privacyReview:"yes",exports:"yes",automation:"no",humanReview:"yes",sensitive:[]});
 assert.equal(Number.isFinite(zero.score), true);
 assert.equal(zero.annualSavings, 0);
 assert.deepEqual(zero.inventorySummary, []);
+assert.deepEqual(zero.agentFootprintSummary, []);
 console.log("PASS: AI Stack Doctor scoring engine");
